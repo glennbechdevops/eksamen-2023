@@ -30,6 +30,14 @@ HiVis Holding.
 
 ## GitHub actions workflow 
 
+Koden er skrevet som en AWS SAM applikasjon, og ligger i mappen "fra_kjell" i dette repoet.
+
+* Hvis du sjekker ut koden i ditt Cloud9-miljø eller på en lokal maskin og har AWS SAM installert, kan du bygge og deployere koden til AWS. Det anbefales å teste dette før du fortsetter.
+* Du skal opprette en GitHub Actions-arbeidsflyt. For hver commit til hovedgrenen (main branch), skal arbeidsflyten bygge og deployere Lambda-funksjonen.
+* Som respons på en sammenslåingsforespørsel (Merge Request) eller en push til en annen gren enn hovedgrenen, skal applikasjonen kun kompileres og bygges, uten deployment.
+
+Oppgave 
+
 * Du skal opprette en GitHub Actions-arbeidsflyt. For hver commit til hovedgrenen (main branch), skal arbeidsflyten bygge og deployere Lambda-funksjonen.
 * Som respons på en sammenslåingsforespørsel (Merge Request) eller en push til en annen gren enn hovedgrenen, skal applikasjonen kun kompileres og bygges, uten deployment.
 * Sensor vil lage en fork av ditt repository. Forklar hva sensor må gjør for å få GitHub Actions workflow til å kjøre i sin egen GitHub-konto.
@@ -38,6 +46,8 @@ HiVis Holding.
 
 Python er ikke et veldig etablert språk i selskapet ditt, så du vil gjerne at også utviklere som ikke har et Pythonmiljø 
 installert på sin maskin skal kunne bruke koden. 
+
+Oppgave 
 
 * Lag en Dockerfile for python koden. Sensor skal kunne gjøre følgende kommando 
 
@@ -48,6 +58,8 @@ docker run kjell -e bucket=mybucker -e folder=myfolder
 Og får se analyse av bilder i gitt bucket og folder, med kun Docker installert på sin maskin 
 
 ### Docker og ECR 
+
+Oppgave 
 
 * Utvid GitHub actions workflow slik at hver commit på main publiserer en et nytt Container image til et ECR repository
 * Hvilken kommando må sensor kjøre for å starte container direkte fra ditt ECR repository 
@@ -62,6 +74,9 @@ docker run ....
 
 * Kjell har gjort forferdelig mange hardkodinger. Bruk terraform variabler til å gjøre infrastrukturkoden mer 
 gjenbrukbar. 
+
+Oppgave 
+
 * Sensor skal kunne deploye infrastrukturen ved å kjøre terraform kommandoen 
 
 ```
