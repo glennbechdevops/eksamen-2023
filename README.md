@@ -23,12 +23,12 @@ Når du ser på arbeidet til Kjell, som ligger i dette repositoryet, vil det bli
 tempo en kvalitet.
 
 Nå er det din tur til å ta over det arbeidet av tvilsom karaketer, og siden du ånder og lever for kontinuerlig
-forbedring må du rydde opp i dette rotet av kode før noen kan tenke på å gjøre noe nytt med applikasjonen, 
+forbedring må du rydde opp i dette rotet av kode før noen kan tenke på å gjøre noe nytt med applikasjonen,
 og ta opp konkurransen med HiVis Holding.
 
 ## Oppgave GitHub actions workflow
 
-Koden er skrevet som en AWS SAM applikasjon, og ligger i mappen "kjell" i dette repoet. Det er åpenbart an har tatt 
+Koden er skrevet som en AWS SAM applikasjon, og ligger i mappen "kjell" i dette repoet. Det er åpenbart an har tatt
 ugangspunkt i et "Hello World" SAM prosjekt og bare brukt navnet sitt som applikasjonsnavn.
 
 * Hvis du sjekker ut koden i ditt Cloud9-miljø eller på en lokal maskin og har AWS SAM installert, kan du bygge og
@@ -40,7 +40,8 @@ ugangspunkt i et "Hello World" SAM prosjekt og bare brukt navnet sitt som applik
 
 Oppgave
 
-* Du skal opprette en GitHub Actions-arbeidsflyt. For hver commit til hovedgrenen (main branch), skal arbeidsflyten
+* Du skal opprette en GitHub Actions-arbeidsflyt for SAM applikasjonen. For hver commit til hovedgrenen (main branch),
+  skal arbeidsflyten
   bygge og deploye Lambda-funksjonen.
 * Som respons på en sammenslåingsforespørsel (Merge Request) eller en push til en annen gren enn hovedgrenen, skal
   applikasjonen kun kompileres og bygges, uten deployment.
@@ -63,7 +64,9 @@ docker run kjell -e bucket=mybucker -e folder=myfolder
 
 Og får se analyse av bilder i gitt bucket og folder, med kun Docker installert på sin maskin
 
-### Docker og ECR
+### Migrering til Java og Spring boot
+
+Du innser at Python ikke er veien videre og har laget et skall av en Java-applikasjon som ligger i dette repoet.
 
 Oppgave
 
