@@ -53,7 +53,7 @@ installert på sin maskin skal kunne bruke koden.
 Oppgave
 
 Lag en Dockerfile for python koden. Sensor skal kunne gjøre følgende kommando for å bygge og kjøre koden.
-Du må fjerne hardkoding av bucketnavn i python koden, slik at vi kan sende verdien inn som en miljøvariabel.
+Du må fjerne hardkoding av bucketnavn i python koden, slik at vi kan sende verdien "BUCKET_NAME" inn som en miljøvariabel.
 
 Dockerfilen skal lages i mappen /kjell/hello_world
 
@@ -62,7 +62,7 @@ docker build -t kjellpy .
 docker run -e AWS_ACCESS_KEY_ID=XXX -e AWS_SECRET_ACCESS_KEY=YYY -e BUCKET_NAME=kjellsimagebucket kjellpy
 ```
 
-Det ligger noen hint i app.py for hvordan Dockerfile kan lages.
+Det ligger noen hint i app.py for Dockerfile
 
 ## Overgang til Java og Spring boot
 
@@ -71,13 +71,13 @@ Java-applikasjon  som ligger i dette repoet. Du ønsker allikevel å beholde Kje
 basert på  Java fungerer identisk. Du skal derfor videre i oppgaven utvide workflowen dokumentet du allerede har laget med ekstra
 jobber.
 
-* Test applikasjonen lokalt i ditt cloud9 miljø med ```mvn spring-boot:run```,
+* Test java-applikasjonen lokalt i ditt cloud9 miljø med ```mvn spring-boot:run```,
 * Du kan teste applikasjonen med ```curl localhost:8080/scan-ppe?bucketName=kjellsimagebucket``` og se på responsen
 
 Oppgave
 
 * Lag en GitHub actions workflow slik at hver commit på main branch lager og publiserer en et nytt Container image til
-  et ECR repository. Du må selv lage et ECR repository i AWS miljøet, du trenger ikke automatisere dette.
+  et ECR repository. Du må selv lage et ECR repository i AWS miljøet, du trenger ikke automatisere prosessen med å lage et repository.
 * Oppgi hvilken kommando sensor kjøre fra sitt Cloud9 miljø for å starte container direkte fra ditt ECR repository? 
 
 ```shell
@@ -94,7 +94,6 @@ Oppgave
 * Fjern hardkodingen av service_name, slik at service_name kan settes lik ditt kandidatnummer
 * Utvid din GitHub Actions workflow til å kjøre terraformkoden, etter jobben som lager container image av Java-applikasjonen
 
-
 Oppgave
 
 * Sensor skal kunne deploye infrastrukturen ved å kjøre terraform kommandoen
@@ -105,18 +104,16 @@ Oppgave
 
 * Beskriv hvilke endringer Sensor må gjøre i sin GitHub Actions workflow for å kjøre sin egen versjon av infrastrukturen
 
-
 ## Feedback 
 
 Vi har jobbet med å gjøre metrikker og målepunkter for applikasjonen vår synlige, og vi har også laget alarmer basert på metrikkene
-
 
 Oppgave
 
 * Gjør nødvendige endringer i Java-applikasjonen til å bruke Micrometer rammeverket for Metrics 
 * Endre koden og lag en teller, en Gauge, og en Timer. Du velger selv hvordan du vil bruke de ulike måleinstrumentene. Begrunn valget ditt
-* Fra Terraformkoden, lag et Dashboard som viser metrikkverdier. Du velger selv innhold men må begrunne valget ditt. 
-*  Fra Terraformkoden, Lag en alarm, som varsler via Epost på kriterier du selv velger, Begrunn valget ditt
+* Fra Terraformkoden, lag et Dashboard som viser metrikkverdier. Du velger selv innhold men må begrunne valget ditt. Dashbord-koden skal lages som en terraform modul.   
+* Fra Terraformkoden, Lag en alarm, som varsler via Epost på kriterier du selv velger, Begrunn valget ditt.
 
 # Drøfteoppgaver
 
@@ -130,4 +127,3 @@ Behovene Drøft hvordan feedback bidrar til kontinuerlig forbedring og hvordan d
 utviklingslivssyklusen."
 
 ### Det Tredje Prinsippet - Kontinuerlig forbedring
-
