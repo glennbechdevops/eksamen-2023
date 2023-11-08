@@ -42,7 +42,7 @@ public class RekognitionController {
                                     .withName(summary.getKey())))
                     .withSummarizationAttributes(new ProtectiveEquipmentSummarizationAttributes()
                             .withMinConfidence(80f)
-                            .withRequiredEquipmentTypes("FACE_COVER", "HAND_COVER", "HEAD_COVER"));
+                            .withRequiredEquipmentTypes("FACE_COVER"));
 
             DetectProtectiveEquipmentResult result = rekognitionClient.detectProtectiveEquipment(request);
             results.add(result);
