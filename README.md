@@ -68,9 +68,11 @@ Det ligger noen hint i app.py for hvordan Dockerfile kan lages.
 
 Du innser raskt at Python ikke er veien videre for et konkurransedyktig produkt og har laget et skall av en
 Java-applikasjon  som ligger i dette repoet. Du ønsker allikevel å beholde Kjell sin kode en stund til for å se at den nye versjonen
-basert på
-Java fungerer identisk. Du skal derfor videre i oppgaven utvide workflowen dokumentet du allerede har laget med ekstra
+basert på  Java fungerer identisk. Du skal derfor videre i oppgaven utvide workflowen dokumentet du allerede har laget med ekstra
 jobber.
+
+* Test applikasjonen lokalt i ditt cloud9 miljø med ```mvn spring-boot:run```,
+* Du kan teste applikasjonen med ```curl localhost:8080/scan-ppe?bucketName=kjellsimagebucket``` og se på responsen
 
 Oppgave
 
@@ -90,7 +92,8 @@ stand til å gjøre API kall mot AWS Rekognition.
 Oppgave 
 
 * Fjern hardkodingen av service_name, slik at service_name kan settes lik ditt kandidatnummer
-* Utvid din GitHub Actions workflow til å kjøre terraformkoden 
+* Utvid din GitHub Actions workflow til å kjøre terraformkoden, etter jobben som lager container image av Java-applikasjonen
+
 
 Oppgave
 
@@ -102,7 +105,20 @@ Oppgave
 
 * Beskriv hvilke endringer Sensor må gjøre i sin GitHub Actions workflow for å kjøre sin egen versjon av infrastrukturen
 
-## Oppgave  DevOps Prinsipper
+
+## Feedback 
+
+Vi har jobbet med å gjøre metrikker og målepunkter for applikasjonen vår synlige, og vi har også laget alarmer basert på metrikkene
+
+
+Oppgave
+
+* Gjør nødvendige endringer i Java-applikasjonen til å bruke Micrometer rammeverket for Metrics 
+* Endre koden og lag en teller, en Gauge, og en Timer. Du velger selv hvordan du vil bruke de ulike måleinstrumentene. Begrunn valget ditt
+* Fra Terraformkoden, lag et Dashboard som viser metrikkverdier. Du velger selv innhold men må begrunne valget ditt. 
+*  Fra Terraformkoden, Lag en alarm, som varsler via Epost på kriterier du selv velger, Begrunn valget ditt
+
+# Drøfteoppgaver
 
 ### Det Første Prinsippet - Flow
 
@@ -114,7 +130,4 @@ Behovene Drøft hvordan feedback bidrar til kontinuerlig forbedring og hvordan d
 utviklingslivssyklusen."
 
 ### Det Tredje Prinsippet - Kontinuerlig forbedring
-
-
-
 
