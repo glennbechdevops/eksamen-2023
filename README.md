@@ -39,8 +39,7 @@ ugangspunkt i et "Hello World" SAM prosjekt og bare brukt navnet sitt som applik
 Oppgave
 
 * Du skal opprette en GitHub Actions-arbeidsflyt for SAM applikasjonen. For hver commit til main branch, skal
-  arbeidsflyten
-  bygge og deploye Lambda-funksjonen.
+  arbeidsflyten bygge og deploye Lambda-funksjonen.
 * Som respons på en Merge Request, eller en push til en annen branch en main skal applikasjonen kun kompileres og
   bygges. Altså ingen deployment.
 * Sensor vil lage en fork av ditt repository. Forklar hva sensor må gjør for å få GitHub Actions workflow til å kjøre i
@@ -48,7 +47,7 @@ Oppgave
 
 ## Docker container
 
-Python er ikke et veldig etablert språk i selskapet ditt, så du vil gjerne at også utviklere som ikke har et Pythonmiljø
+Python er ikke et veldig etablert språk i selskapet ditt, så du vil gjerne at også utviklere som ikke har et Python
 installert på sin maskin skal kunne bruke koden.
 
 Oppgave
@@ -56,32 +55,42 @@ Oppgave
 Lag en Dockerfile for python koden. Sensor skal kunne gjøre følgende kommando for å bygge og kjøre koden.
 Du må fjerne hardkoding av bucketnavn i python koden, slik at vi kan sende verdien inn som en miljøvariabel.
 
+Dockerfilen skal lages i mappen /kjell/hello_world
+
 ```shell
 docker build -t kjellpy . 
 docker run -e AWS_ACCESS_KEY_ID=XXX -e AWS_SECRET_ACCESS_KEY=YYY -e BUCKET_NAME=kjellsimagebucket kjellpy
 ```
+
 Det ligger noen hint i app.py for hvordan Dockerfile kan lages.
 
-### Migrering til Java og Spring boot
+## Overgang til Java og Spring boot
 
-Du inser raskt at Python ikke er veien videre for et konkurransedyktig produkt og har laget et skall av en Java-applikasjon 
-som ligger i dette repoet.
+Du innser raskt at Python ikke er veien videre for et konkurransedyktig produkt og har laget et skall av en
+Java-applikasjon  som ligger i dette repoet. Du ønsker allikevel å beholde Kjell sin kode en stund til for å se at den nye versjonen
+basert på
+Java fungerer identisk. Du skal derfor videre i oppgaven utvide workflowen dokumentet du allerede har laget med ekstra
+jobber.
 
 Oppgave
 
-* Utvid GitHub actions workflow slik at hver commit på main publiserer en et nytt Container image til et ECR repository
-* Hvilken kommando må sensor kjøre for å starte container direkte fra ditt ECR repository
+* Lag en GitHub actions workflow slik at hver commit på main branch lager og publiserer en et nytt Container image til
+  et ECR repository. Du må selv lage et ECR repository i AWS miljøet, du trenger ikke automatisere dette.
+* Oppgi hvilken kommando sensor kjøre fra sitt Cloud9 miljø for å starte container direkte fra ditt ECR repository? 
 
 ```shell
 docker run .... 
 ```
 
-## Terraform
+## Terraform og Infrastruktur som kode
 
-### Gjør forbedringer i kodekvalitet
+Se på koden som ligger i infra katalogen, den inneholder kun en app_runner_service og en IAM rolle som gjør denne i 
+stand til å gjøre API kall mot AWS Rekognition. 
+ 
+Oppgave 
 
-* Kjell har gjort forferdelig mange hardkodinger. Bruk terraform variabler til å gjøre infrastrukturkoden mer
-  gjenbrukbar.
+* Fjern hardkodingen av service_name, slik at service_name kan settes lik ditt kandidatnummer
+* Utvid din GitHub Actions workflow til å kjøre terraformkoden 
 
 Oppgave
 
