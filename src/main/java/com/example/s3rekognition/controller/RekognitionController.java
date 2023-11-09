@@ -26,11 +26,10 @@ public class RekognitionController {
     private final AmazonS3 s3Client;
     private final AmazonRekognition rekognitionClient;
 
-    private static Logger logger = Logger.getLogger(RekognitionController.class.getName());
+    private static final Logger logger = Logger.getLogger(RekognitionController.class.getName());
 
     public RekognitionController() {
         this.s3Client = AmazonS3ClientBuilder.standard().build();
-        ;
         this.rekognitionClient = AmazonRekognitionClientBuilder.standard().build();
     }
 
@@ -81,6 +80,6 @@ public class RekognitionController {
             classificationResponses.add(classification);
         }
         PPEResponse ppeResponse = new PPEResponse(bucketName, classificationResponses);
-        return EntityResponse.<PPEResponse>fromObject(ppeResponse).status(200).build();
+        return EntityResponse.fromObject(ppeResponse).status(200).build();
     }
 }

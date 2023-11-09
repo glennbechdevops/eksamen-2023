@@ -1,12 +1,13 @@
 package com.example.s3rekognition;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * This is the response sent back from the Apprunner service
  *
  */
-public class PPEResponse {
+public class PPEResponse implements Serializable {
 
     String bucketName;
     List<PPEClassificationResponse> results;
