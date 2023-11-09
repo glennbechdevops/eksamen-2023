@@ -127,7 +127,7 @@ Java-applikasjon som ligger i dette repoet. Applikasjonen er en Spring Boot appl
 Koden vil iterere over alle bilder i den oppgitte S3 bucketen, og bruke AWS Rekognition til å finne ut av om det er
 mennesker på disse bildene, og om de bruker verneutstyr eller ikke.
 
-Leg en workflow fil for Java/Spring-Boot applikasjonen.
+Lag en workflow fil for Java/Spring-Boot applikasjonen.
 
 * Test java-applikasjonen lokalt i ditt cloud9 miljø ved å stå i rotmappen til ditt repository, og kjøre
   kommandoen ```mvn spring-boot:run```,
@@ -153,17 +153,16 @@ docker run -p 8080:8080 -e AWS_ACCESS_KEY_ID=XXX -e AWS_SECRET_ACCESS_KEY=YYY -e
 
 ## Terraform, AWS Apprunner og Infrastruktur som kode
 
-Se på koden som ligger i infra katalogen, den inneholder kun en app_runner_service og en IAM rolle som gjør denne i
-stand til å gjøre API kall mot AWS Rekognition.
+Se på koden som ligger i infra katalogen, den inneholder kun en app_runner_service og en IAM roller som gjør denne i
+stand til å gjøre API kall mot AWS Rekognition og lese fra S3. 
 
 Oppgave
 
 * Fjern hardkodingen av service_name, slik at service_name kan settes lik ditt kandidatnummer
-* Utvid din GitHub Actions workflow til å kjøre terraformkoden
+* Se på dokumentasjonen til aws_apprunner_service ressursen, og reduser CPU til 256, og Memory til 1024
+* Utvid din GitHub Actions workflow til også å kjøre terraformkoden
 * På hver push til main, skal både Docker container image lages, publiseres til ECR, og kjøre Terraform.
-
-Oppgave
-
+* Du må skrive en provider/backend konfigurasjon som lagrer en state-fil på en S3 bucket. Du kan bruke samme S3 bucket som vi har brukt til det formålet i øvingene. 
 * Sensor skal kunne deploye infrastrukturen ved å kjøre Terraform kommandoen
 
 ```
@@ -172,6 +171,10 @@ Oppgave
 ```
 
 * Beskriv hvilke endringer Sensor må gjøre i sin GitHub Actions workflow for å kjøre sin egen versjon av infrastrukturen
+
+
+
+
 
 ## Feedback
 

@@ -9,13 +9,13 @@ import com.amazonaws.services.s3.model.ListObjectsV2Result;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
 import com.example.s3rekognition.PPEClassificationResponse;
 import com.example.s3rekognition.PPEResponse;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.function.EntityResponse;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -44,8 +44,9 @@ public class RekognitionController {
      * @param bucketName
      * @return
      */
-    @GetMapping("/scan-ppe")
-    public EntityResponse<PPEResponse> scanForPPE(@RequestParam String bucketName) {
+    @GetMapping(value = "/scan-ppe", consumes = "*/*", produces = "application/json")
+    @ResponseBody
+    public ResponseEntity<PPEResponse> scanForPPE(@RequestParam String bucketName) {
         // List all objects in the S3 bucket
         ListObjectsV2Result imageList = s3Client.listObjectsV2(bucketName);
 
@@ -76,10 +77,11 @@ public class RekognitionController {
             logger.info("scanning " + image.getKey() + ", violation result " + violation);
 
             // Categorize the current image as a violation or not.
-            PPEClassificationResponse classification = new PPEClassificationResponse(image.getKey(), violation);
+            int personCount = result.getPersons().size();
+            PPEClassificationResponse classification = new PPEClassificationResponse(image.getKey(), personCount,  violation);
             classificationResponses.add(classification);
         }
         PPEResponse ppeResponse = new PPEResponse(bucketName, classificationResponses);
-        return EntityResponse.fromObject(ppeResponse).status(200).build();
+        return ResponseEntity.ok(ppeResponse);
     }
 }

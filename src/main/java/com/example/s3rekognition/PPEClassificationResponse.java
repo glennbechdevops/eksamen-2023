@@ -6,12 +6,11 @@ public class PPEClassificationResponse  implements Serializable  {
 
     private String fileName;
     private boolean violation;
+    private int personCount;
 
-    public PPEClassificationResponse() {
-    }
-
-    public PPEClassificationResponse(String fileName, boolean violation) {
+    public PPEClassificationResponse(String fileName, int personCount, boolean violation) {
         this.fileName = fileName;
+        this.personCount = personCount;
         this.violation = violation;
     }
 
