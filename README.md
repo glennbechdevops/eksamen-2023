@@ -1,15 +1,30 @@
 # Eksamen PGR301 2023
 
-# Krav til leveranse
+## Krav til leveransen
 
-* Det er ikke krav til at noe infrastruktur skal kjøre, eller at en applikasjon skal kjøre når du leverer oppgaven.
-  Sensor vil lage lage en fork av ditt repository og lage all infrastruktur selv ved å bruke infrastrukturkode,
-  workflows og dine instruksjoner
+* Eksamensoppgaven er gitt på GitHub repository ; https://github.com/glennbechdevops/eksamen_2023
+* Ved innlevering via WiseFlow, lager du et *tekstdokument* som kun inneholder link til dit repository
+* Vær grei å lage et tekstdokument, ikke PDF, ikke Word, ikke Powerpoint
+* Du skal ikke lage en fork av dette repositoryet, men kopiere innholdet til et nytt. Årsaken er at sensor vil lage en fork av ditt repo, og arbeidsflyten blir lettere hvis ditt repo ikke er en fork.
+* Du kan jobbe i et privat repo, og deretter gjøre det public rett før innleveringsfrist hvis du er bekymret for plagiat fra medstudenter.
+
+Når sensor evaluerer oppgaven vil han/hun 
+
+* Se på ditt repository og "Actions" fanen i GitHub for å bekrefte at Workflows faktisk virker
+* Vurdere drøftelsesoppgavene. Du må lage en  "Readme" for besvarelsen i ditt repo
+* Sensor vil Lage en fork av ditt repo og vil kjøre GitHub Actions Workflows med egen AWS- og GitHub bruker
+
+## Litt om GitHub free tier
+
+* I oppgaven blir du bedt om å lage GitHub actions workflows.
+* Med GitHub "Free tier" har du 2,000 minutter med gratis byggetid per måned, dersom du bruker et privat repo.
+* Dersom dere i en ekstrem situasjon skulle trenge mer byggetid, kan dere gjøre repository public. Da er byggetiden ubegrenset.
+* Hvis dere da er bekymret for at andre skal kopiere arbeidet deres, kan dere lage en ny GitHubbruker med et tilfeldig navn.
 
 # Spesielle hensyn relatert til Cloud 9
 
-* Diskplass
-* Rettigheter
+* Hvis du går tom for diskplass - Informasjon blir sendt ut på Canvas
+* Rettigheter og sikkerhet i Cloud 9 - Informasjon blir sendt ut på Canvas 
 
 # Oppgavebeskrivelse
 
