@@ -1,0 +1,22 @@
+on:
+  push:
+
+jobs:
+  sam_application:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+      - uses: aws-actions/setup-sam@v1
+      - uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-west-1
+      - name: Build 
+        working-directory: ./kjell
+        run: sam build --use-container
+      - name: Deploy
+        if: github.ref == 'refs/heads/main'
+        working-directory: ./kjell
+        run: sam deploy --no-confirm-changeset --no-fail-on-empty-changeset --parameter-overrides BucketName=rekognition-vincent --stack-name vincent-kjell-sam  --s3-bucket pgr301-sam-bucket --capabilities CAPABILITY_IAM --region eu-west-1
