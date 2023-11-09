@@ -2,7 +2,7 @@ resource "aws_apprunner_service" "service" {
   service_name = var.prefix
 
   instance_configuration {
-    instance_role_arn = aws_iam_role.instance.arn
+    instance_role_arn = aws_iam_role.role_for_apprunner_service.arn
   }
 
   source_configuration {
@@ -20,26 +20,55 @@ resource "aws_apprunner_service" "service" {
   }
 }
 
-resource "aws_iam_role" "rekognition_role" {
-  name = "rekognition_full_access_role"
-
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17",
-    Statement = [
-      {
-        Action = "sts:AssumeRole",
-        Effect = "Allow",
-        Principal = {
-          Service = "rekognition.amazonaws.com"
-        },
-      },
-    ],
-  })
+resource "aws_iam_role" "role_for_apprunner_service" {
+  name               = "${var.prefix}-appr"
+  assume_role_policy = data.aws_iam_policy_document.assume_role.json
 }
 
 
-resource "aws_iam_policy_attachment" "rekognition_full_access" {
-  name       = "rekognition_full_access"
-  roles      = [aws_iam_role.rekognition_role.name]
-  policy_arn = "arn:aws:iam::aws:policy/AmazonRekognitionFullAccess"
+data "aws_iam_policy_document" "assume_role" {
+  statement {
+    effect = "Allow"
+
+    principals {
+      type        = "Service"
+      identifiers = ["tasks.apprunner.amazonaws.com"]
+    }
+
+    actions = ["sts:AssumeRole"]
+  }
+}
+
+data "aws_iam_policy_document" "policy" {
+  statement {
+    effect    = "Allow"
+    actions   = ["rekognition:*"]
+    resources = ["*"]
+  }
+  
+  statement  {
+    effect    = "Allow"
+    actions   = ["s3:*"]
+    resources = ["*"]
+  }
+}
+
+resource "aws_iam_policy" "policy" {
+  name        = "${var.prefix}-apr-policy"
+  description = "Policy for apprunner instance"
+  policy      = data.aws_iam_policy_document.policy.json
+}
+
+
+resource "aws_iam_role_policy_attachment" "attachment" {
+  role       = aws_iam_role.role_for_apprunner_service.name
+  policy_arn = aws_iam_policy.policy.arn
+}
+
+variable "prefix" {
+  type = string
+}
+
+variable "image" {
+  type = string
 }
