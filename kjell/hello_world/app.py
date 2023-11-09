@@ -14,7 +14,7 @@ s3_client = boto3.client('s3', region_name='eu-west-1')
 rekognition_client = boto3.client('rekognition', region_name='eu-west-1')
 
 # Hmm.. Må huske å gjøre dette, når jeg får tid...
-BUCKET_NAME = "kjellsimagebucker"
+BUCKET_NAME = "kjellsimagebucket"
 
 def lambda_handler(event, context):
 
@@ -28,7 +28,7 @@ def lambda_handler(event, context):
             rekognition_response = rekognition_client.detect_protective_equipment(
                 Image={
                     'S3Object': {
-                        'Bucket': bucket,
+                        'Bucket': BUCKET_NAME,
                         'Name': obj['Key']
                     }
                 },
