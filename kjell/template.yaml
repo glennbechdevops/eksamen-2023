@@ -11,6 +11,10 @@ Globals:
     Timeout: 60
     MemorySize: 512
 
+Parameters: 
+  BucketName:
+    Type: String
+  
 Resources:
 
   Bucket:
