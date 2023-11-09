@@ -29,14 +29,15 @@ public class RekognitionController {
     private static Logger logger = Logger.getLogger(RekognitionController.class.getName());
 
     public RekognitionController() {
-        this.s3Client =  AmazonS3ClientBuilder.standard().build();;
-        this.rekognitionClient = AmazonRekognitionClientBuilder.standard().build() ;
+        this.s3Client = AmazonS3ClientBuilder.standard().build();
+        ;
+        this.rekognitionClient = AmazonRekognitionClientBuilder.standard().build();
     }
 
     /**
      * This endpoint takes an S3 bucket name in as an argument, scans all the
      * Files in the bucket for Protective Gear Violations.
-     *
+     * <p>
      * It does so by iterating over all persons in a picture, and then again over
      * each body part of the person. If the body part is a FACE and there is no
      * protective gear on it, a violation is recorded for the picture.
@@ -46,24 +47,24 @@ public class RekognitionController {
      */
     @GetMapping("/scan-ppe")
     public EntityResponse<PPEResponse> scanForPPE(@RequestParam String bucketName) {
-        List<DetectProtectiveEquipmentResult> results = new ArrayList<>();
+        // List all objects in the S3 bucket
+        ListObjectsV2Result imageList = s3Client.listObjectsV2(bucketName);
 
-
+        // This will hold all of our classifications
         List<PPEClassificationResponse> classificationResponses = new ArrayList<>();
 
-        // List all objects in the S3 bucket
-        ListObjectsV2Result listing = s3Client.listObjectsV2(bucketName);
-        List<S3ObjectSummary> summaries = listing.getObjectSummaries();
-
+        // This is all the images in the bucket
+        List<S3ObjectSummary> images = imageList.getObjectSummaries();
         // Iterate over each object and scan for PPE
-        for (S3ObjectSummary file : summaries) {
-            logger.info("scanning "+ file.getKey());
+        for (S3ObjectSummary image : images) {
+            logger.info("scanning " + image.getKey());
+            // This is where the magic happens, use AWS rekognition to detect PPE
             DetectProtectiveEquipmentRequest request = new DetectProtectiveEquipmentRequest()
                     .withImage(new Image()
                             .withS3Object(new S3Object()
                                     .withBucket(bucketName)
-                                    .withName(file.getKey())))
-                     .withSummarizationAttributes(new ProtectiveEquipmentSummarizationAttributes()
+                                    .withName(image.getKey())))
+                    .withSummarizationAttributes(new ProtectiveEquipmentSummarizationAttributes()
                             .withMinConfidence(80f)
                             .withRequiredEquipmentTypes("FACE_COVER"));
 
@@ -73,11 +74,13 @@ public class RekognitionController {
             boolean violation = result.getPersons().stream()
                     .flatMap(p -> p.getBodyParts().stream())
                     .anyMatch(bodyPart -> bodyPart.getName().equals("FACE") && bodyPart.getEquipmentDetections().isEmpty());
+            logger.info("scanning " + image.getKey() + ", violation result " + violation);
 
-            PPEClassificationResponse classification = new PPEClassificationResponse(file.getKey(), violation);
+            // Categorize the current image as a violation or not.
+            PPEClassificationResponse classification = new PPEClassificationResponse(image.getKey(), violation);
             classificationResponses.add(classification);
         }
         PPEResponse ppeResponse = new PPEResponse(bucketName, classificationResponses);
-        return EntityResponse.<PPEResponse> fromObject(ppeResponse).status(200).build();
+        return EntityResponse.<PPEResponse>fromObject(ppeResponse).status(200).build();
     }
 }
