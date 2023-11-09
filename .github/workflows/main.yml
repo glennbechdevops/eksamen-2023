@@ -1,7 +1,5 @@
 on:
   push:
-    branches:
-      - main
 
 jobs:
   sam_application:
@@ -21,5 +19,6 @@ jobs:
         working-directory: ./kjell
         run: sam build --use-container
       - name: Deploy
+        if: github.ref != 'refs/heads/main'
         working-directory: ./kjell
         run: sam deploy --no-confirm-changeset --no-fail-on-empty-changeset --parameter-overrides BucketName=rekognition-vincent --stack-name vincent-kjell-sam  --s3-bucket pgr301-sam-bucket --capabilities CAPABILITY_IAM --region eu-west-1
