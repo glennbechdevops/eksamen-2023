@@ -35,7 +35,7 @@ public class RekognitionController {
 
         // Iterate over each object and scan for PPE
         for (S3ObjectSummary summary : summaries) {
-            DetectProtectiveEquipmentRequest request = new DetectProtectiveEquipmentRequest()
+''            DetectProtectiveEquipmentRequest request = new DetectProtectiveEquipmentRequest()
                     .withImage(new Image()
                             .withS3Object(new S3Object()
                                     .withBucket(bucketName)

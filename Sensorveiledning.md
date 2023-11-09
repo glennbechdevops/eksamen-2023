@@ -14,3 +14,5 @@ docker run -e AWS_ACCESS_KEY_ID=XXX -e AWS_SECRET_ACCESS_KEY=YYY -e BUCKET_NAME=
 * Følg studentens instruksjoner - hvordan få dette til å fungere i sensor sitt miljø
 * Lag en commit mot main branch, se at nytt container image blir laget i AWS ECR 
 * Følg studenten sin instruksjon på hvordan starte en container, og se at du får et korrekt resultat ved å gjøre en GET request på http://localhost:8080/ppe-scan
+
+

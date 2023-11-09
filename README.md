@@ -10,6 +10,25 @@ Som nyansatt, har du fått den utfordrende oppgaven å ta over etter "Kjell" som
 
 ![Logo](img/logo.png "Assignment logo")
 
+# Litt om AWS Rekognition
+
+I denne oppgaven skal dere bli  kjent med en ny AWS tjeneste
+
+AWS Rekognition er en tjeneste fra Amazon Web Services (AWS) som tilbyr avansert bilde- og videoanalyse ved hjelp av
+maskinlæringsteknologi. Den har en rekke funksjoner for å gjenkjenne og analysere ulike elementer i bilder og videoer,
+inkludert ansiktsgjenkjenning, objektgjenkjenning, tekstgjenkjenning og mer.
+
+AWS Rekognition kan brukes til å identifisere om personer på bilder eller i videoer bruker riktig personlig beskyttelsesutstyr som hjelmer, vernebriller,
+hansker, og verneklær. Dette kan være spesielt nyttig i situasjoner der det er viktig å sikre at arbeidere eller
+besøkende følger sikkerhetskravene, for eksempel i byggebransjen, industrielle anlegg eller helsevesenet.
+
+Tjenesten kan også tilpasse seg ulike bransjer og bruksområder ved å tillate brukerne å lage 
+egendefinerte modeller basert på sine egne datasett og krav.
+
+For å bruke AWS Rekognition for PPE-deteksjon, laster du enkelt opp bilder eller videoer til tjenesten, og den vil
+deretter analysere innholdet og gi deg informasjon om hvorvidt PPE er tilstede og eventuelt gi posisjonsdata for hvor
+PPE er funnet. 
+
 # Oppgave Kjell's Python kode
 
 Kjell var en kløpper til å kode Python, og kunne danse over tastaturet med en slik nåde at selv rubber
@@ -33,8 +52,10 @@ og ta opp konkurransen med HiVis Holding.
 Koden er skrevet som en AWS SAM applikasjon, og ligger i mappen "kjell" i dette repoet. Det er åpenbart an har tatt
 ugangspunkt i et "Hello World" SAM prosjekt og bare brukt navnet sitt som applikasjonsnavn.
 
-* Hvis du sjekker ut koden i ditt Cloud9-miljø eller på en lokal maskin og har AWS SAM installert, kan du bygge og
-  deploye koden til AWS. Det anbefales å teste dette før du fortsetter.
+* I ditt Cloud9-miljø, eller på din egen maskin med AWS SAM installert, kan du bygge og deploye koden til AWS.
+* Det anbefales å teste dette før du fortsetter.
+
+Advarsel! Se opp for hardkoding ! 
 
 Oppgave
 
@@ -53,7 +74,8 @@ installert på sin maskin skal kunne bruke koden.
 Oppgave
 
 Lag en Dockerfile for python koden. Sensor skal kunne gjøre følgende kommando for å bygge og kjøre koden.
-Du må fjerne hardkoding av bucketnavn i python koden, slik at vi kan sende verdien "BUCKET_NAME" inn som en miljøvariabel.
+Du må fjerne hardkoding av bucketnavn i python koden, slik at vi kan sende verdien "BUCKET_NAME" inn som en
+miljøvariabel.
 
 Dockerfilen skal lages i mappen /kjell/hello_world
 
@@ -67,8 +89,10 @@ Det ligger noen hint i app.py for Dockerfile
 ## Overgang til Java og Spring boot
 
 Du innser raskt at Python ikke er veien videre for et konkurransedyktig produkt og har laget et skall av en
-Java-applikasjon  som ligger i dette repoet. Du ønsker allikevel å beholde Kjell sin kode en stund til for å se at den nye versjonen
-basert på  Java fungerer identisk. Du skal derfor videre i oppgaven utvide workflowen dokumentet du allerede har laget med ekstra
+Java-applikasjon som ligger i dette repoet. Du ønsker allikevel å beholde Kjell sin kode en stund til for å se at den
+nye versjonen
+basert på Java fungerer identisk. Du skal derfor videre i oppgaven utvide workflowen dokumentet du allerede har laget
+med ekstra
 jobber.
 
 * Test java-applikasjonen lokalt i ditt cloud9 miljø med ```mvn spring-boot:run```,
@@ -77,8 +101,9 @@ jobber.
 Oppgave
 
 * Lag en GitHub actions workflow slik at hver commit på main branch lager og publiserer en et nytt Container image til
-  et ECR repository. Du må selv lage et ECR repository i AWS miljøet, du trenger ikke automatisere prosessen med å lage et repository.
-* Oppgi hvilken kommando sensor kjøre fra sitt Cloud9 miljø for å starte container direkte fra ditt ECR repository? 
+  et ECR repository. Du må selv lage et ECR repository i AWS miljøet, du trenger ikke automatisere prosessen med å lage
+  et repository.
+* Oppgi hvilken kommando sensor kjøre fra sitt Cloud9 miljø for å starte container direkte fra ditt ECR repository?
 
 ```shell
 docker run .... 
@@ -86,13 +111,14 @@ docker run ....
 
 ## Terraform og Infrastruktur som kode
 
-Se på koden som ligger i infra katalogen, den inneholder kun en app_runner_service og en IAM rolle som gjør denne i 
-stand til å gjøre API kall mot AWS Rekognition. 
- 
-Oppgave 
+Se på koden som ligger i infra katalogen, den inneholder kun en app_runner_service og en IAM rolle som gjør denne i
+stand til å gjøre API kall mot AWS Rekognition.
+
+Oppgave
 
 * Fjern hardkodingen av service_name, slik at service_name kan settes lik ditt kandidatnummer
-* Utvid din GitHub Actions workflow til å kjøre terraformkoden, etter jobben som lager container image av Java-applikasjonen
+* Utvid din GitHub Actions workflow til å kjøre terraformkoden, etter jobben som lager container image av
+  Java-applikasjonen
 
 Oppgave
 
@@ -104,15 +130,18 @@ Oppgave
 
 * Beskriv hvilke endringer Sensor må gjøre i sin GitHub Actions workflow for å kjøre sin egen versjon av infrastrukturen
 
-## Feedback 
+## Feedback
 
-Vi har jobbet med å gjøre metrikker og målepunkter for applikasjonen vår synlige, og vi har også laget alarmer basert på metrikkene
+Vi har jobbet med å gjøre metrikker og målepunkter for applikasjonen vår synlige, og vi har også laget alarmer basert på
+metrikkene
 
 Oppgave
 
-* Gjør nødvendige endringer i Java-applikasjonen til å bruke Micrometer rammeverket for Metrics 
-* Endre koden og lag en teller, en Gauge, og en Timer. Du velger selv hvordan du vil bruke de ulike måleinstrumentene. Begrunn valget ditt
-* Fra Terraformkoden, lag et Dashboard som viser metrikkverdier. Du velger selv innhold men må begrunne valget ditt. Dashbord-koden skal lages som en terraform modul.   
+* Gjør nødvendige endringer i Java-applikasjonen til å bruke Micrometer rammeverket for Metrics
+* Endre koden og lag en teller, en Gauge, og en Timer. Du velger selv hvordan du vil bruke de ulike måleinstrumentene.
+  Begrunn valget ditt
+* Fra Terraformkoden, lag et Dashboard som viser metrikkverdier. Du velger selv innhold men må begrunne valget ditt.
+  Dashbord-koden skal lages som en terraform modul.
 * Fra Terraformkoden, Lag en alarm, som varsler via Epost på kriterier du selv velger, Begrunn valget ditt.
 
 # Drøfteoppgaver
