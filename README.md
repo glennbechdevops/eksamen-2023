@@ -1,12 +1,27 @@
 # Eksamen PGR301 2023
 
+
+# Krav til leveranse
+
+
+* Det er ikke krav til at noe infrastruktur skal kjøre, eller at en applikasjon skal kjøre når du leverer oppgaven. 
+  Sensor vil lage lage en fork av ditt repository og lage all infrastruktur selv ved å bruke infrastrukturkode, workflows og dine instruksjoner 
+
+
+# Spesielle hensyn relatert til Cloud 9 
+
+* Diskplass 
+* Rettigheter
+
+# Oppgavebeskrivelse 
+
 I et pulserende teknologisamfunn i Grünerløkka, Oslo, har en livlig oppstart ved navn 'VerneVokterne' begynt å utmeisle
 sitt eget nisjeområde i helsesektoren. De utvikler banebrytende bildebehandlingsprogramvare designet for å sikre at
 helsepersonell alltid bruker personlig verneutstyr (PPE). Med en pasjon for innovasjon og et brennende ønske om å
 forbedre arbeidssikkerheten, samler 'VerneVokterne' et team av skarpe utviklere, engasjerte designere og visjonære
 produktledere.
 
-Som nyansatt, har du fått den utfordrende oppgaven å ta over etter "Kjell" som ikke lenger jobber i selskapet
+Som nyansatt har du fått den utfordrende oppgaven å ta over etter "Kjell" som ikke lenger jobber i selskapet
 
 ![Logo](img/logo.png "Assignment logo")
 
@@ -59,7 +74,7 @@ Advarsel! Se opp for hardkoding !
 
 Oppgave
 
-* Du skal opprette en GitHub Actions-arbeidsflyt for SAM applikasjonen. For hver commit til main branch, skal
+* Du skal opprette en GitHub Actions-arbeidsflyt for SAM applikasjonen. For hver push til main branch, skal
   arbeidsflyten bygge og deploye Lambda-funksjonen.
 * Som respons på en Merge Request, eller en push til en annen branch en main skal applikasjonen kun kompileres og
   bygges. Altså ingen deployment.
@@ -84,32 +99,43 @@ docker build -t kjellpy .
 docker run -e AWS_ACCESS_KEY_ID=XXX -e AWS_SECRET_ACCESS_KEY=YYY -e BUCKET_NAME=kjellsimagebucket kjellpy
 ```
 
-Det ligger noen hint i app.py for Dockerfile
+Det ligger noen hint i app.py for hvordan du kan lage en Dockerfile
 
 ## Overgang til Java og Spring boot
 
 Du innser raskt at Python ikke er veien videre for et konkurransedyktig produkt og har laget et skall av en
-Java-applikasjon som ligger i dette repoet. Du ønsker allikevel å beholde Kjell sin kode en stund til for å se at den
-nye versjonen
-basert på Java fungerer identisk. Du skal derfor videre i oppgaven utvide workflowen dokumentet du allerede har laget
-med ekstra
-jobber.
+Java-applikasjon som ligger i dette repoet. Applikasjonen er en Spring Boot applikasjon, som eksponerer et enkeltpunk
 
-* Test java-applikasjonen lokalt i ditt cloud9 miljø med ```mvn spring-boot:run```,
-* Du kan teste applikasjonen med ```curl localhost:8080/scan-ppe?bucketName=kjellsimagebucket``` og se på responsen
+```http://<host>:<port>/scan-ppe?bucketName=<bucketnavn>``` 
+
+Koden vil sjekke alle bilder i oppgitt bucket, og se om bildene inneholder mennesker med- eller uten verneutstyr. 
+
+Leg en egen workflow fil for Java/Sprinb-Boot applikasjonen.
+
+* Test java-applikasjonen lokalt i ditt cloud9 miljø ved å stå i rotmappen til ditt repository, og kjøre kommandoen ```mvn spring-boot:run```,
+* Du kan teste applikasjonen i en terminal med ```curl localhost:8080/scan-ppe?bucketName=kjellsimagebucket``` og se på responsen
 
 Oppgave
 
-* Lag en GitHub actions workflow slik at hver commit på main branch lager og publiserer en et nytt Container image til
-  et ECR repository. Du må selv lage et ECR repository i AWS miljøet, du trenger ikke automatisere prosessen med å lage
-  et repository.
-* Oppgi hvilken kommando sensor kjøre fra sitt Cloud9 miljø for å starte container direkte fra ditt ECR repository?
+* Lag en Dockerfile for Java-appliksjonen. Du skal lage en "multi stage" Dockerfile som både kompilerer og kjører applikasjonen. 
+
+Sensor skal kunne kjøre følgende kommandoer for å teste applikajonen din 
+
+```shell
+docker build -t ppe . 
+docker run -p 8080:8080 -e AWS_ACCESS_KEY_ID=XXX -e AWS_SECRET_ACCESS_KEY=YYY -e BUCKET_NAME=kjellsimagebucket ppe
+```
+
+* Lag en GitHub actions workflow som ved hver push til main branch lager og publiserer en et nytt Container image til et 
+  ECR repository. Du må selv lage et ECR repository i AWS miljøet, du trenger ikke automatisere prosessen med å lage
+  dette. Container image skal ha en tag som er lik commit hash i Git. For eksempel; glenn-ppe:b2572585e. 
+* Lag en ny Workflow fil, ikke gjenbruk den du lagde for Pythonkoden.
 
 ```shell
 docker run .... 
 ```
 
-## Terraform og Infrastruktur som kode
+## Terraform, AWS Apprunner og Infrastruktur som kode
 
 Se på koden som ligger i infra katalogen, den inneholder kun en app_runner_service og en IAM rolle som gjør denne i
 stand til å gjøre API kall mot AWS Rekognition.
@@ -117,14 +143,15 @@ stand til å gjøre API kall mot AWS Rekognition.
 Oppgave
 
 * Fjern hardkodingen av service_name, slik at service_name kan settes lik ditt kandidatnummer
-* Utvid din GitHub Actions workflow til å kjøre terraformkoden, etter jobben som lager container image av
-  Java-applikasjonen
+* Utvid din GitHub Actions workflow til å kjøre terraformkoden
+* På hver push til main, skal både Docker container image lages, publiseres til ECR, og kjøre Terraform. 
 
 Oppgave
 
-* Sensor skal kunne deploye infrastrukturen ved å kjøre terraform kommandoen
+* Sensor skal kunne deploye infrastrukturen ved å kjøre Terraform kommandoen
 
 ```
+    terraform init 
     terraform apply --auto-approve --var prefix=glenn --var bucket=<bucket name>
 ```
 
@@ -132,17 +159,21 @@ Oppgave
 
 ## Feedback
 
-Vi har jobbet med å gjøre metrikker og målepunkter for applikasjonen vår synlige, og vi har også laget alarmer basert på
-metrikkene
+Vi har jobbet med å gjøre metrikker og målepunkter for applikasjonen vår synlige, og vi har også laget alarmer og Dashboards basert på
+metrikkene.
 
 Oppgave
 
 * Gjør nødvendige endringer i Java-applikasjonen til å bruke Micrometer rammeverket for Metrics
-* Endre koden og lag en teller, en Gauge, og en Timer. Du velger selv hvordan du vil bruke de ulike måleinstrumentene.
-  Begrunn valget ditt
-* Fra Terraformkoden, lag et Dashboard som viser metrikkverdier. Du velger selv innhold men må begrunne valget ditt.
-  Dashbord-koden skal lages som en terraform modul.
-* Fra Terraformkoden, Lag en alarm, som varsler via Epost på kriterier du selv velger, Begrunn valget ditt.
+* Lag en eller flere nye endepunkter for tjenesten. Her får dere stor kreativ frihet, utforsk tjenesten Rekognition og se om dere kan  
+  lage ny og relevant funksjonalitet. 
+* Legg deretter til kode som leverer Metrics til AWS CloudWatch. 
+* Dere kan selv velge hvordan dere implementerer målepunktene, men implementasjonen må være relevant og gi mening 
+
+Dere skal skrive minst 
+
+* En metrikk som teller 
+* En metrik som måler tid 
 
 # Drøfteoppgaver
 

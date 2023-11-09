@@ -3,18 +3,18 @@ import boto3
 import os
 
 # Denne koden kan også kjøres som en "Stand alone" applikasjon (Uten SAM) bare gjøre følgende
+# (dersom man har python på maskinen sin altså...)
 #
 # pip3 install -r requirements.txt
 # python3 app.py
-# Husk å installer python3 på maskinen din
-# TODO: Hvordan løser vi dette i prod mon tro?
+#
 # Hilsen Kjell
 
 s3_client = boto3.client('s3', region_name='eu-west-1')
 rekognition_client = boto3.client('rekognition', region_name='eu-west-1')
 
-# Hmm.. Må huske å gjøre dette, når jeg får tid...
-BUCKET_NAME = "kjellsimagebucket"
+# Hmm.. Må huske å gjøre dette bedre, når jeg får tid...
+BUCKET_NAME = "kjellsimagebucker"
 
 def lambda_handler(event, context):
 
