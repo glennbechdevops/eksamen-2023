@@ -5,8 +5,9 @@ on:
 
 jobs:
   sam_application:
-    working-directory: ./kjell
     runs-on: ubuntu-latest
+    working-directory: ./kjell
+
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
