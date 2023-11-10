@@ -22,7 +22,7 @@ Når sensoren evaluerer oppgaven, vil han/hun:
 
 - I oppgaven blir du bedt om å opprette GitHub Actions Workflows.
 - Med GitHub Free Tier har du 2000 minutter med gratis byggetid per måned i private repository
-- I ekstreme situasjoner, hvor du trenger mer byggetid, har du alternativet å gjøre repositoryet offentlig. Dette vil gi
+- Hvis du trenger mer byggetid, har du alternativet å gjøre repositoryet offentlig. Dette vil gi
   deg ubegrenset byggetid. GitHub gir ubegrenset byggetid for offentlige repoer.
 - Hvis du er bekymret for at andre kan kopiere arbeidet ditt når repositoryet er offentlig, kan du opprette en ny
   GitHub-bruker med et tilfeldig navn for anonymitet.
@@ -31,6 +31,14 @@ Når sensoren evaluerer oppgaven, vil han/hun:
 
 - Løsning på problem med diskplassmangel - informasjon bli delt på Canvas-plattformen.
 - Informasjon om rettigheter og sikkerhet i Cloud 9 vil også bli delt på Canvas
+
+# Evaluering
+
+- Oppgave 1. Kjells Pythonkode - 20 Poeng
+- Oppgave 2. Overgang til Java og Spring Boot - 15 Poeng 
+- Oppgave 3. Terraform, AWS Apprunner og IAC - 15 Poeng
+- Oppgave 4. Feedback -30 Poeng 
+- Oppgave 5. Drøfteoppgaver - 20 poeng 
 
 # Oppgavebeskrivelse
 
@@ -70,7 +78,7 @@ PPE er funnet.
 
 Bruk gjerne litt tid til å bli kjent med tjenesten i AWS miljøet https://eu-west-1.console.aws.amazon.com/rekognition/home
 
-# Oppgave 1 Kjell's Python kode
+# Oppgave 1. Kjell's Python kode
 
 ## A. SAM & GitHub actions workflow
 
@@ -191,18 +199,18 @@ docker run -p 8080:8080 -e AWS_ACCESS_KEY_ID=XXX -e AWS_SECRET_ACCESS_KEY=YYY -e
 * Den siste versjonen av container image som blir pushet til ECR, skal i tillegg få en tag "latest"
 * Lag en ny Workflow fil, ikke gjenbruk den du lagde for Pythonkoden.
 
-## Oppgave 3- Terraform, AWS Apprunner og Infrastruktur som kode
+# Oppgave 3- Terraform, AWS Apprunner og Infrastruktur som kode
 
 Se på koden som ligger i infra katalogen, den inneholder kun en app_runner_service og en IAM roller som gjør denne i
 stand til å gjøre API kall mot AWS Rekognition og lese fra S3.
 
-### A. Kodeendringer og forbedringer
+## A. Kodeendringer og forbedringer
 
 * Fjern hardkodingen av service_name, slik at du kan bruke dit kandidatnummer eller noe annet som service navn.
 * Se etter andre hardkodede verdier og se om du kan gjøer noe med kodekvaliteten
 * Se på dokumentasjonen til aws_apprunner_service ressursen, og reduser CPU til 256, og Memory til 1024 (defaultverdiene er høyere)
 
-### B. Terraform i GitHub Actions
+## B. Terraform i GitHub Actions
 
 * Utvid din GitHub Actions workflow som lager et Docker image, til også å kjøre terraformkoden
 * På hver push til main, skal Terraformkoden kjøres etter jobber som bygger Docker container image.
@@ -241,7 +249,7 @@ Eksempelvis vil en en teller som øker hver gang en metode blir kalt ikke bli vu
 
 ### Vurderingskriterier
 
-* Hensikten med at dere skal utvide kodebasen er å få flere naturlige steder å legge inn måleinstrumenter. Kodevolum har ingen betydning, men en god besvarelse vil  
+* Hensikten med å utvide kodebasen er å få flere naturlige steder å legge inn måleinstrumenter. Kodevolum har ingen betydning, men en god besvarelse vil  
   legge til virkelig og nyttig funksjonalitet 
 * En god besvarelse registrer både tekniske, og foretningsmessig metrikker.
 * En god besvarelse bør bruke minst tre ulike måleinstrumenter på en måte som gir mening  
