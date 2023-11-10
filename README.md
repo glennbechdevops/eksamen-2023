@@ -74,7 +74,7 @@ PPE er funnet.
 Koden er skrevet som en AWS SAM applikasjon, og ligger i mappen "kjell" i dette repoet. Det er åpenbart at Kjell har
 tatt utgangspunkt i et "Hello World" SAM prosjekt og bare brukt navnet sitt som applikasjonsnavn.
 
-* I ditt Cloud9-miljø, eller på din egen maskin med AWS SAM installert, kan du bygge og deploye koden til AWS ved å bruke ```sam cli```
+* I ditt Cloud9-miljø, eller på din egen maskin, kan du bygge og deploye koden til AWS ved å bruke ```sam cli```
 * Det anbefales å teste dette før du fortsetter.
 
 Advarsel! Se opp for hardkoding ! Du må kanskje endre noe for å få deployet selv.
