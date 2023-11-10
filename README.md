@@ -264,7 +264,7 @@ Eksempelvis vil en en teller som øker hver gang en metode blir kalt ikke bli vu
 * En god besvarelse registrer både tekniske, og foretningsmessig metrikker.
 * En god besvarelse bør bruke minst tre ulike måleinstrumenter på en måte som gir mening
 
-### B. CloudWatch Alarm
+### B. CloudWatch Alarm og Terraform moduler
 
 Lag en CloudWatch alarm som sender et varsler på Epost dersom den utløses. Derre velger selv kriteriet for når alarmen
 skal løses ut, men dere
