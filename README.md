@@ -2,39 +2,50 @@
 
 ## Krav til leveransen
 
-* Eksamensoppgaven er gitt på GitHub repository ; https://github.com/glennbechdevops/eksamen_2023
-* Ved innlevering via WiseFlow, lager du et *tekstdokument* som kun inneholder link til dit repository
-* Vær grei å lage et tekstdokument, ikke PDF, ikke Word, ikke Powerpoint
-* Du skal ikke lage en fork av dette repositoryet, men kopiere innholdet til et nytt. Årsaken er at sensor vil lage en fork av ditt repo, og arbeidsflyten blir lettere hvis ditt repo ikke er en fork.
-* Du kan jobbe i et privat repo, og deretter gjøre det public rett før innleveringsfrist hvis du er bekymret for plagiat fra medstudenter.
+* Eksamensoppgaven er tilgjengelig i GitHub-repositoriet: https://github.com/glennbechdevops/eksamen_2023.
+* Når du leverer inn oppgaven via WiseFlow, vennligst opprett et tekstdokument som kun inneholder en kobling til dit
+  repository.
+* Vær snill og bruk et tekstdokumentformat, ikke PDF, Word eller PowerPoint.
+* Du skal ikke opprette en "fork" av dette repositoryet, men heller kopiere innholdet til et nytt repository. Årsaken er
+  at sensoren vil opprette en "fork" av ditt repository, og arbeidsflyten blir enklere hvis ditt repository ikke
+  allerede er en "fork."
+* Hvis du er bekymret for plagiat fra medstudenter, kan du arbeide i et privat repository og deretter gjøre det
+  offentlig tilgjengelig like før innleveringsfristen.
 
-Når sensor evaluerer oppgaven vil han/hun 
+Når sensoren evaluerer oppgaven, vil han/hun:
 
-* Se på ditt repository og "Actions" fanen i GitHub for å bekrefte at Workflows faktisk virker
-* Vurdere drøftelsesoppgavene. Du må lage en  "Readme" for besvarelsen i ditt repo
-* Sensor vil Lage en fork av ditt repo og vil kjøre GitHub Actions Workflows med egen AWS- og GitHub bruker
+* Sjekke ditt repository og gå til fanen "Actions" på GitHub for å bekrefte at Workflows faktisk fungerer som de skal.
+* Vurdere drøftelsesoppgavene. Du må opprette en "Readme" for besvarelsen i ditt repository. Denne "Readme"-filen skal
+  inneholde en grundig beskrivelse og drøfting av oppgavene.
+* Sensoren vil opprette en "fork" (en kopi) av ditt repository og deretter kjøre GitHub Actions Workflows med sin egen
+  AWS- og GitHub-bruker for å bekrefte at alt fungerer som forventet.
 
-## Litt om GitHub free tier
+## Om GitHub Free Tier
 
-* I oppgaven blir du bedt om å lage GitHub actions workflows.
-* Med GitHub "Free tier" har du 2,000 minutter med gratis byggetid per måned, dersom du bruker et privat repo.
-* Dersom dere i en ekstrem situasjon skulle trenge mer byggetid, kan dere gjøre repository public. Da er byggetiden ubegrenset.
-* Hvis dere da er bekymret for at andre skal kopiere arbeidet deres, kan dere lage en ny GitHubbruker med et tilfeldig navn.
+- I oppgaven blir du bedt om å opprette GitHub Actions Workflows.
+- Med GitHub "Free tier" har du tilgjengelig 2 000 minutter med gratis byggetid per måned i private repository
+- I ekstreme situasjoner, hvor du trenger mer byggetid, har du alternativet å gjøre repositoryet offentlig. Dette vil gi
+  deg ubegrenset byggetid.
+- Hvis du er bekymret for at andre kan kopiere arbeidet ditt når repositoryet er offentlig, kan du opprette en ny
+  GitHub-bruker med et tilfeldig navn for anonymitet.
 
-# Spesielle hensyn relatert til Cloud 9
+## Spesielle hensyn knyttet til Cloud 9
 
-* Hvis du går tom for diskplass - Informasjon blir sendt ut på Canvas
-* Rettigheter og sikkerhet i Cloud 9 - Informasjon blir sendt ut på Canvas 
+- Løsning på problem med diskplassmangel - informasjon bli delt på Canvas-plattformen.
+- Informasjon om rettigheter og sikkerhet i Cloud 9 vil også bli delt på Canvas
 
 # Oppgavebeskrivelse
 
-I et pulserende teknologisamfunn i Grünerløkka, Oslo, har en livlig oppstart ved navn 'VerneVokterne' begynt å utmeisle
-sitt eget nisjeområde i helsesektoren. De utvikler banebrytende bildebehandlingsprogramvare designet for å sikre at
-helsepersonell alltid bruker personlig verneutstyr (PPE). Med en pasjon for innovasjon og et brennende ønske om å
-forbedre arbeidssikkerheten, samler 'VerneVokterne' et team av skarpe utviklere, engasjerte designere og visjonære
-produktledere.
+I et pulserende teknologisamfunn på Grünerløkka, Oslo, har en livlig oppstart ved navn 'VerneVokterne' begynt å meisle
+ut sitt eget nisjeområde innenfor helsesektoren. De utvikler banebrytende programvare for bildebehandling som er designet
+for å sikre at helsepersonell alltid bruker personlig verneutstyr (PPE). Med en lidenskap for innovasjon og et sterkt
+ønske om å forbedre arbeidssikkerheten, har 'VerneVokterne' samlet et team av dyktige utviklere, engasjerte designere og
+visjonære produktledere.
 
-Som nyansatt har du fått den utfordrende oppgaven å ta over etter "Kjell" som ikke lenger jobber i selskapet
+Selskapet hadde tidligere en veldig sentral utvikler som heter Kjell. Kjell hadde en unik tilnærming til kode,
+Dessverre var kvaliteten på Kjells kode, for å si det pent, "kreativ."
+
+Som nyansatt har du blitt gitt den utfordrende oppgaven å overta etter "Kjell," som ikke lenger er en del av selskapet.
 
 ![Logo](img/logo.png "Assignment logo")
 
@@ -58,36 +69,19 @@ For å bruke AWS Rekognition for PPE-deteksjon, laster du enkelt opp bilder elle
 deretter analysere innholdet og gi deg informasjon om hvorvidt PPE er tilstede og eventuelt gi posisjonsdata for hvor
 PPE er funnet.
 
-# Oppgave Kjell's Python kode
+# Oppgave 1 Kjell's Python kode
 
-Kjell var en kløpper til å kode Python, og kunne danse over tastaturet med en slik nåde at selv rubber
-ducks (du vet, de som Devs snakker til når de er fastlåst) begynte å følge med. Hans mesterverk var kode som kunne
-oppdage om mennesker på bilder har på seg ansiktsmaske, for eksempel på vei inn på en
-arbeidsplass der påkrevet.
-
-Dette ble laget ved hjelp av AWS Rekognition. Men så, på en helt vanlig tirsdag, etter å ha inntatt sin
-tredje espresso, fikk Kjell et tilbud han ikke kunne avslå - å bli med i en startup, HiVis Holdings, som holder på med
-et konkurrerende produkt.
-
-Når du ser på arbeidet til Kjell, som ligger i dette repositoryet, vil det bli klart for deg at kjell var mer opptatt av
-tempo en kvalitet.
-
-Nå er det din tur til å ta over det arbeidet, og siden du etter PGR301 ånder og lever for kontinuerlig
-forbedring må du rydde opp i dette rotet av kode før du kan tenke på å gjøre noe nytt med applikasjonen,
-og ta opp konkurransen med HiVis Holding.
-
-## Oppgave GitHub actions workflow
+## A. SAM & GitHub actions workflow
 
 Koden er skrevet som en AWS SAM applikasjon, og ligger i mappen "kjell" i dette repoet. Det er åpenbart at Kjell har
-tatt
-ugangspunkt i et "Hello World" SAM prosjekt og bare brukt navnet sitt som applikasjonsnavn.
+tatt ugangspunkt i et "Hello World" SAM prosjekt og bare brukt navnet sitt som applikasjonsnavn.
 
-* I ditt Cloud9-miljø, eller på din egen maskin med AWS SAM installert, kan du bygge og deploye koden til AWS.
+* I ditt Cloud9-miljø, eller på din egen maskin med AWS SAM installert, kan du bygge og deploye koden til AWS ved å bruke ```sam cli```
 * Det anbefales å teste dette før du fortsetter.
 
 Advarsel! Se opp for hardkoding ! Du må kanskje endre noe for å få deployet selv.
 
-Oppgave
+### Oppgave
 
 * Du skal opprette en GitHub Actions-arbeidsflyt for SAM applikasjonen. For hver push til main branch, skal
   arbeidsflyten bygge og deploye Lambda-funksjonen.
@@ -96,12 +90,12 @@ Oppgave
 * Sensor vil lage en fork av ditt repository. Forklar hva sensor må gjøre for å få GitHub Actions workflow til å kjøre i
   sin egen GitHub-konto.
 
-## Docker container
+## B. Docker container
 
 Python er ikke et veldig etablert språk i VerneVokterene, så du vil gjerne at også utviklere som ikke har et Python
 installert på sin maskin skal kunne bruke koden.
 
-Oppgave
+### Opppgave
 
 Lag en Dockerfile for python koden. Du må forbedre hardkoding av bucketnavn i python koden, slik at vi kan sende
 verdien "BUCKET_NAME" inn som en
@@ -117,15 +111,15 @@ docker run -e AWS_ACCESS_KEY_ID=XXX -e AWS_SECRET_ACCESS_KEY=YYY -e BUCKET_NAME=
 
 Det ligger noen hint i filen app.py som vil hjelpe deg med å lage en Dockerfile
 
-## Overgang til Java og Spring boot
+# Oppgave 2. Overgang til Java og Spring boot
 
 Du innser raskt at Python ikke er veien videre for et konkurransedyktig produkt og har selv laget starten på en
 Java-applikasjon som ligger i dette repoet. Applikasjonen er en Spring Boot applikasjon, som eksponerer et endepunkt
 
 ```http://<host>:<port>/scan-ppe?bucketName=<bucketnavn>```
 
-Som du vil se bearbeider Javakoden response fra tjenesten Rekognition litt mer en hva Python-varianten gjør. 
-En respons fra Javaapplikasjonen kan se slik ut ; 
+Som du vil se bearbeider Javakoden response fra tjenesten Rekognition litt mer en hva Python-varianten gjør.
+En respons fra Javaapplikasjonen kan se slik ut ;
 
 ```shell
 {
@@ -165,13 +159,13 @@ En respons fra Javaapplikasjonen kan se slik ut ;
 }
 ```
 
-Vi får tilbake ett element per fil som inneholder 
+Vi får tilbake ett element per fil som inneholder
 
-* Filename - Navnet på filen i S3 bucketen 
-* violation - true hvis det er person, eller personer på bildet uten nødvendig utstyr 
+* Filename - Navnet på filen i S3 bucketen
+* violation - true hvis det er person, eller personer på bildet uten nødvendig utstyr
 * personCount - hvor mange personer Rekognition fant på bildet.
 
-## Oppgave
+### A. Dockerfile
 
 Lag en workflow fil for Java/Spring-Boot applikasjonen.
 
@@ -179,9 +173,6 @@ Lag en workflow fil for Java/Spring-Boot applikasjonen.
   kommandoen ```mvn spring-boot:run```,
 * Du kan teste applikasjonen i en terminal med ```curl localhost:8080/scan-ppe?bucketName=kjellsimagebucket``` og se på
   responsen
-
-Oppgave
-
 * Lag en Dockerfile for Java-appliksjonen. Du skal lage en multi stage Dockerfile som både kompilerer og kjører
   applikasjonen.
 
@@ -192,65 +183,81 @@ docker build -t ppe .
 docker run -p 8080:8080 -e AWS_ACCESS_KEY_ID=XXX -e AWS_SECRET_ACCESS_KEY=YYY -e BUCKET_NAME=kjellsimagebucket ppe
 ```
 
+### B. GitHub Actions workflow for Container image og ECR
+
 * Lag en GitHub actions workflow som ved hver push til main branch lager og publiserer en et nytt Container image til et
-  ECR repository. Du må selv lage et ECR repository i AWS miljøet, du trenger ikke automatisere prosessen med å lage
-  dette. Container image skal ha en tag som er lik commit hash i Git. For eksempel; glenn-ppe:b2572585e.
+  ECR repository. 
+* Du må selv lage et ECR repository i AWS miljøet, du trenger ikke automatisere prosessen med å lage
+  dette. 
+* Container image skal ha en tag som er lik commit hash i Git. For eksempel; glenn-ppe:b2572585e.
+* Den siste versjonen av container image som blir pushet til ECR, skal i tillegg få en tag "latest"
 * Lag en ny Workflow fil, ikke gjenbruk den du lagde for Pythonkoden.
 
-## Terraform, AWS Apprunner og Infrastruktur som kode
+## Oppgave 3- Terraform, AWS Apprunner og Infrastruktur som kode
 
 Se på koden som ligger i infra katalogen, den inneholder kun en app_runner_service og en IAM roller som gjør denne i
-stand til å gjøre API kall mot AWS Rekognition og lese fra S3. 
+stand til å gjøre API kall mot AWS Rekognition og lese fra S3.
 
-Oppgave
+### A. Kodeendringer og forbedringer 
 
-* Fjern hardkodingen av service_name, slik at service_name kan settes lik ditt kandidatnummer
+* Fjern hardkodingen av service_name, slik at du kan bruke dit kandidatnummer eller noe annet som service navn.
 * Se på dokumentasjonen til aws_apprunner_service ressursen, og reduser CPU til 256, og Memory til 1024
+
+
+### B. Terraform i GitHub Actions
+
 * Utvid din GitHub Actions workflow til også å kjøre terraformkoden
-* På hver push til main, skal både Docker container image lages, publiseres til ECR, og kjøre Terraform.
-* Du må skrive en provider/backend konfigurasjon som lagrer en state-fil på en S3 bucket. Du kan bruke samme S3 bucket som vi har brukt til det formålet i øvingene. 
-* Sensor skal kunne deploye infrastrukturen ved å kjøre Terraform kommandoen
+* På hver push til main, skal både Terraformkoden kjøres, dette skal skje etter jobber som bygger Docker container
+* Du må skrive en provider/backend konfigurasjon som lagrer en state-fil på en S3 bucket. Du kan bruke samme S3 bucket
+  som vi har brukt til det formålet i øvingene.
+* Beskriv hvilken Terraform kommandoer sensor må gjøre for å kunne opprette infrastrukturen i sin egen AWS konto
 
 ```
     terraform init 
-    terraform apply --auto-approve --var prefix=glenn --var bucket=<bucket name>
+    terraform apply --auto-approve --var prefix=<prefix> --var bucket=<bucket name>
 ```
 
-* Beskriv hvilke endringer Sensor må gjøre i sin GitHub Actions workflow for å kjøre sin egen versjon av infrastrukturen
+* Beskriv også eventuelt hvilke endringer Sensor må gjøre i din GitHub Actions workflow eller kode.
 
+## Oppgave 4. Feedback 
 
+### A. Utvid applikasjonen og legg inn "Måleinstrumenter" 
 
+Med måleinstrumenter mener jeg i denne sammenhengen ulike typer "meters" i micrometer rammeverket feks, 
 
-
-## Feedback
+* Meter
+* Gauge
+* Timer
+* LongTaskTimer
+* DistributionSummary 
 
 Vi har jobbet med å gjøre metrikker og målepunkter for applikasjonen vår synlige, og vi har også laget alarmer og
-Dashboards basert på
-metrikkene.
+Dashboards basert på metrikkene. I denne oppgaven får dere stor kreativ frihet, utforsk tjenesten Rekognition og se om dere kan lage ny og relevant funksjonalitet.Lag minst et nytt endepunkt. 
+Gjør deretter nødvendige endringer i Java-applikasjonen til å bruke Micrometer rammeverket for Metrics, og konfigurer for leveranse av Metrics til CloudWatch
+Dere kan detetter selv velge hvordan dere implementerer målepunkter i koden.
 
-Oppgave
+Dere skal skrive en kort begrunnelse for hvorfor dere har valgt målepunktene dere har gjort, og valgene må gi mening. Altså ikke en teller som 
+øker hver gang en metode blir kalt. Få med både tekniske, og foretningsmessig metrikker. 
 
-* Gjør nødvendige endringer i Java-applikasjonen til å bruke Micrometer rammeverket for Metrics
-* Lag en eller flere nye endepunkter for tjenesten. Her får dere stor kreativ frihet, utforsk tjenesten Rekognition og
-  se om dere kan  
-  lage ny og relevant funksjonalitet.
-* Legg deretter til kode som leverer Metrics til AWS CloudWatch.
-* Dere kan selv velge hvordan dere implementerer målepunktene, men implementasjonen må være relevant og gi mening
+### B. CloudWatch Alarm 
 
-Dere skal skrive minst
+Lag minst en CloudWatch alarm som varsler på Epost. Derre velger selv kriteriet for når alarmen skal løses ut, men dere må skrive en kort 
+begrunnelse for hvorfor dere har gjort valget. 
 
-* En metrikk som teller
-* En metrik som måler tid
+Alarmen skal lages ved hjelp av Terraformkode. Og lages som en separat Terrafomr modul. Legg vekt på å unngå hardkoding av verdier i modulen. 
 
 # Drøfteoppgaver
 
 ### Det Første Prinsippet - Flow
 
+
+
 ### Det Andre Prinsippet - Feedback
 
-Oppgave: "Tenk deg at du har implementert en ny funksjonalitet i en applikasjon du jobber med. Beskriv hvordan du vil
-etablere og bruke teknikker vi har lært frea "feedback" for å sikre at den nye funksjonaliteten møter brukernes behov.
+Tenk deg at du har implementert en ny funksjonalitet i en applikasjon du jobber med. Beskriv hvordan du vil
+etablere og bruke teknikker vi har lært fra "feedback" for å sikre at den nye funksjonaliteten møter brukernes behov.
 Behovene Drøft hvordan feedback bidrar til kontinuerlig forbedring og hvordan de kan integreres i ulike stadier av
 utviklingslivssyklusen."
 
 ### Det Tredje Prinsippet - Kontinuerlig forbedring
+
