@@ -2,8 +2,10 @@ import json
 import boto3
 import os
 
-# Denne koden kan også kjøres som en "Stand alone" applikasjon (Uten SAM) bare gjøre følgende
+# Denne koden kan også kjøres som en selvstendig applikasjon (Uten SAM) bare gjøre følgende
 # (dersom man har python på maskinen sin altså...)
+#
+# Instruksjoner for å kjøre ... (Kan sikkert lage container senere ..)
 #
 # pip3 install -r requirements.txt
 # python3 app.py

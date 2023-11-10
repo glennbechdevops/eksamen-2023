@@ -91,14 +91,13 @@ Advarsel! Se opp for hardkoding ! Du må kanskje endre noe for å få deployet s
 
 ## B. Docker container
 
-Python er ikke et veldig etablert språk i VerneVokterene, så du vil gjerne at også utviklere som ikke har et Python
-installert på sin maskin skal kunne bruke koden.
+Python er ikke et veldig etablert språk i VerneVokterene, og du vil gjerne at utviklere som ikke har et Python
+installert på sin maskin skal kunne teste koden.
 
 ### Opppgave
 
-Lag en Dockerfile for python koden. Du må løse og fjerne hardkoding av bucketnavn i python koden, slik at vi kan sende
-verdien "BUCKET_NAME" inn som en
-miljøvariabel.
+Lag en Dockerfile for python koden. Du må løse og fjerne hardkoding av bucketnavn i app.py koden, slik at den leser
+verdien "BUCKET_NAME" fra en miljøvariabel.
 
 Dockerfilen skal lages i mappen ```/kjell/hello_world```. Sensor skal kunne gjøre følgende kommando for å bygge et
 container image og kjøre koden.
@@ -166,10 +165,8 @@ Vi får tilbake ett element per fil som inneholder
 
 ### A. Dockerfile
 
-Lag en workflow fil for Java/Spring-Boot applikasjonen.
-
 * Test java-applikasjonen lokalt i ditt cloud9 miljø ved å stå i rotmappen til ditt repository, og kjøre
-  kommandoen ```mvn spring-boot:run```,
+  kommandoen ```mvn spring-boot:run```
 * Du kan teste applikasjonen i en terminal med ```curl localhost:8080/scan-ppe?bucketName=kjellsimagebucket``` og se på
   responsen
 * Lag en Dockerfile for Java-appliksjonen. Du skal lage en multi stage Dockerfile som både kompilerer og kjører
@@ -204,11 +201,11 @@ stand til å gjøre API kall mot AWS Rekognition og lese fra S3.
 
 ### B. Terraform i GitHub Actions
 
-* Utvid din GitHub Actions workflow til også å kjøre terraformkoden
-* På hver push til main, skal både Terraformkoden kjøres, dette skal skje etter jobber som bygger Docker container
+* Utvid din GitHub Actions workflow som lager et Docker image, til også å kjøre terraformkoden
+* På hver push til main, skal både Terraformkoden kjøres etter jobber som bygger Docker container image.
 * Du må skrive en provider/backend konfigurasjon som lagrer en state-fil på en S3 bucket. Du kan bruke samme S3 bucket
   som vi har brukt til det formålet i øvingene.
-* Beskriv hvilken Terraform kommandoer sensor må gjøre for å kunne opprette infrastrukturen i sin egen AWS konto
+* Beskriv hvilken Terraform kommandoer sensor må gjøre for å kunne opprette infrastrukturen i sin egen AWS konto, for eksempel
 
 ```
     terraform init 
@@ -222,7 +219,7 @@ stand til å gjøre API kall mot AWS Rekognition og lese fra S3.
 ### A. Utvid applikasjonen og legg inn "Måleinstrumenter"
 
 I denne oppgaven får dere stor kreativ frihet i å utforske tjenesten Rekognition og se om
-dere kan lage ny og relevant funksjonalitet.Lag minst et nytt endepunkt. https://aws.amazon.com/rekognition/
+dere kan lage ny og relevant funksjonalitet.Lag minst et nytt endepunkt. Se på dokumentasjonen; https://aws.amazon.com/rekognition/
 
 Nå som dere har en litt større kodebase. Gjør nødvendige endringer i Java-applikasjonen til å bruke Micrometer rammeverket for Metrics, og konfigurer
 for leveranse av Metrics til CloudWatch
@@ -236,19 +233,24 @@ Med måleinstrumenter menes i denne sammenhengen ulike typer "meters" i micromet
 * LongTaskTimer
 * DistributionSummary
 
-
-
 Dere skal skrive en kort begrunnelse for hvorfor dere har valgt målepunktene dere har gjort, og valgene må gi mening.
-Eksempelvis vil en en teller som øker hver gang en metode blir kalt ikke bli vurdert som en god løsning. Pass på å få med både tekniske, og foretningsmessig metrikker.
+Eksempelvis vil en en teller som øker hver gang en metode blir kalt ikke bli vurdert som en god løsning. 
+
+### Vurderingskriterier
+
+* Hensikten med at dere skal utvide kodebasen er å få flere naturlige steder å legge inn Metrics. Kodevolum har ingen betydning, men en god besvarelse vil  
+  legge til virkelig og nyttig funksjonalitet 
+* En god besvarelse registrer både tekniske, og foretningsmessig metrikker.
+* En god besvarelse bør bruke minst tre ulike måleinstrumenter på en måte som gir mening  
+
 
 ### B. CloudWatch Alarm
 
-Lag minst en CloudWatch alarm som varsler på Epost. Derre velger selv kriteriet for når alarmen skal løses ut, men dere
-må skrive en kort
-begrunnelse for hvorfor dere har gjort valget.
+Lag en CloudWatch alarm som sender et varsler på Epost dersom den utløses. Derre velger selv kriteriet for når alarmen skal løses ut, men dere
+må skrive en kort begrunnelse for valget, og valget må gi mening. 
 
-Alarmen skal lages ved hjelp av Terraformkode. Og lages som en separat Terrafomr modul. Legg vekt på å unngå hardkoding
-av verdier i modulen.
+Alarmen skal lages ved hjelp av Terraformkode. Koden skal lages som en separat Terrafomr modul. Legg vekt på å unngå hardkoding
+av verdier i modulen for maksimal gjenbrukbarhet. 
 
 # Oppgave 4. Drøfteoppgaver
 
