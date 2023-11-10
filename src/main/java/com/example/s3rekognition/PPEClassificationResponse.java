@@ -29,4 +29,12 @@ public class PPEClassificationResponse  implements Serializable  {
     public void setViolation(boolean violation) {
         this.violation = violation;
     }
+
+    public int getPersonCount() {
+        return personCount;
+    }
+
+    public void setPersonCount(int personCount) {
+        this.personCount = personCount;
+    }
 }
