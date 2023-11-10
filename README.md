@@ -96,7 +96,7 @@ installert på sin maskin skal kunne bruke koden.
 
 ### Opppgave
 
-Lag en Dockerfile for python koden. Du må forbedre hardkoding av bucketnavn i python koden, slik at vi kan sende
+Lag en Dockerfile for python koden. Du må løse og fjerne hardkoding av bucketnavn i python koden, slik at vi kan sende
 verdien "BUCKET_NAME" inn som en
 miljøvariabel.
 
