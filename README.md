@@ -68,6 +68,8 @@ For å bruke AWS Rekognition for PPE-deteksjon, laster du enkelt opp bilder elle
 deretter analysere innholdet og gi deg informasjon om hvorvidt PPE er tilstede og eventuelt gi posisjonsdata for hvor
 PPE er funnet.
 
+Bruk gjerne litt tid til å bli kjent med tjenesten i AWS miljøet https://eu-west-1.console.aws.amazon.com/rekognition/home
+
 # Oppgave 1 Kjell's Python kode
 
 ## A. SAM & GitHub actions workflow
@@ -96,7 +98,7 @@ installert på sin maskin skal kunne teste koden.
 
 ### Opppgave
 
-Lag en Dockerfile for python koden. Du må løse og fjerne hardkoding av bucketnavn i app.py koden, slik at den leser
+Lag en Dockerfile som bygger et container image du kan bruke for å kjøre python koden. Du må løse og fjerne hardkoding av bucketnavn i app.py koden, slik at den leser
 verdien "BUCKET_NAME" fra en miljøvariabel.
 
 Dockerfilen skal lages i mappen ```/kjell/hello_world```. Sensor skal kunne gjøre følgende kommando for å bygge et
@@ -179,9 +181,9 @@ docker build -t ppe .
 docker run -p 8080:8080 -e AWS_ACCESS_KEY_ID=XXX -e AWS_SECRET_ACCESS_KEY=YYY -e BUCKET_NAME=kjellsimagebucket ppe
 ```
 
-### B. GitHub Actions workflow for Container image og ECR
+### B. GitHub Actions workflow for container image og ECR
 
-* Lag en GitHub actions workflow som ved hver push til main branch lager og publiserer en et nytt Container image til et
+* Lag en GitHub actions workflow som ved hver push til main branch lager og publiserer et nytt Container image til et
   ECR repository.
 * Du må selv lage et ECR repository i AWS miljøet, du trenger ikke automatisere prosessen med å lage
   dette.
@@ -197,12 +199,13 @@ stand til å gjøre API kall mot AWS Rekognition og lese fra S3.
 ### A. Kodeendringer og forbedringer
 
 * Fjern hardkodingen av service_name, slik at du kan bruke dit kandidatnummer eller noe annet som service navn.
-* Se på dokumentasjonen til aws_apprunner_service ressursen, og reduser CPU til 256, og Memory til 1024
+* Se etter andre hardkodede verdier og se om du kan gjøer noe med kodekvaliteten
+* Se på dokumentasjonen til aws_apprunner_service ressursen, og reduser CPU til 256, og Memory til 1024 (defaultverdiene er høyere)
 
 ### B. Terraform i GitHub Actions
 
 * Utvid din GitHub Actions workflow som lager et Docker image, til også å kjøre terraformkoden
-* På hver push til main, skal både Terraformkoden kjøres etter jobber som bygger Docker container image.
+* På hver push til main, skal Terraformkoden kjøres etter jobber som bygger Docker container image.
 * Du må skrive en provider/backend konfigurasjon som lagrer en state-fil på en S3 bucket. Du kan bruke samme S3 bucket
   som vi har brukt til det formålet i øvingene.
 * Beskriv hvilken Terraform kommandoer sensor må gjøre for å kunne opprette infrastrukturen i sin egen AWS konto, for eksempel
@@ -212,14 +215,14 @@ stand til å gjøre API kall mot AWS Rekognition og lese fra S3.
     terraform apply --auto-approve --var prefix=<prefix> --var bucket=<bucket name>
 ```
 
-* Beskriv også eventuelt hvilke endringer Sensor må gjøre i din GitHub Actions workflow eller kode.
+* Beskriv også eventuelt hvilke endringer Sensor må gjøre i din GitHub Actions workflow eller kode som provider.tf
 
 ## Oppgave 4. Feedback
 
 ### A. Utvid applikasjonen og legg inn "Måleinstrumenter"
 
 I denne oppgaven får dere stor kreativ frihet i å utforske tjenesten Rekognition og se om
-dere kan lage ny og relevant funksjonalitet.Lag minst et nytt endepunkt. Se på dokumentasjonen; https://aws.amazon.com/rekognition/
+dere kan lage ny og relevant funksjonalitet. Lag minst et nytt endepunkt. Se på dokumentasjonen; https://aws.amazon.com/rekognition/
 
 Nå som dere har en litt større kodebase. Gjør nødvendige endringer i Java-applikasjonen til å bruke Micrometer rammeverket for Metrics, og konfigurer
 for leveranse av Metrics til CloudWatch
@@ -238,7 +241,7 @@ Eksempelvis vil en en teller som øker hver gang en metode blir kalt ikke bli vu
 
 ### Vurderingskriterier
 
-* Hensikten med at dere skal utvide kodebasen er å få flere naturlige steder å legge inn Metrics. Kodevolum har ingen betydning, men en god besvarelse vil  
+* Hensikten med at dere skal utvide kodebasen er å få flere naturlige steder å legge inn måleinstrumenter. Kodevolum har ingen betydning, men en god besvarelse vil  
   legge til virkelig og nyttig funksjonalitet 
 * En god besvarelse registrer både tekniske, og foretningsmessig metrikker.
 * En god besvarelse bør bruke minst tre ulike måleinstrumenter på en måte som gir mening  
@@ -249,8 +252,8 @@ Eksempelvis vil en en teller som øker hver gang en metode blir kalt ikke bli vu
 Lag en CloudWatch alarm som sender et varsler på Epost dersom den utløses. Derre velger selv kriteriet for når alarmen skal løses ut, men dere
 må skrive en kort begrunnelse for valget, og valget må gi mening. 
 
-Alarmen skal lages ved hjelp av Terraformkode. Koden skal lages som en separat Terrafomr modul. Legg vekt på å unngå hardkoding
-av verdier i modulen for maksimal gjenbrukbarhet. 
+Alarmen skal lages ved hjelp av Terraformkode. Koden skal lages som en separat Terraform modul. Legg vekt på å unngå hardkoding
+av verdier i modulen for maksimal gjenbrukbarhet.Pass samtidig på at brukere av modulen ikke må oppgå veldig mange variabler når de inkluderer den i koden sin.
 
 # Oppgave 4. Drøfteoppgaver
 
@@ -265,6 +268,7 @@ vennligst inkluder:
 - Fordelene med å bruke CI i et utviklingsprosjekt.
 - Hvordan CI kan forbedre kodekvaliteten og effektivisere utviklingsprosessen.
 - Hvordan opplever en utvikler hverdagen i et prosjekt som har sterkt fokus på CI?
+- Hvordan jobber vi med CI i GitHub rent praktisk? 
 
 ### B. Sammenligning av Scrum/Smidig og DevOps fra et Utviklers Perspektiv
 
