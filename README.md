@@ -2,7 +2,7 @@
 
 ## Krav til leveransen
 
-* Eksamensoppgaven er tilgjengelig i GitHub-repositoriet: https://github.com/glennbechdevops/eksamen_2023.
+* Eksamensoppgaven, kode og nødvendig filer er tilgjengelig i GitHub-repositoriet: https://github.com/glennbechdevops/eksamen_2023.
 * Når du leverer inn oppgaven via WiseFlow, vennligst opprett et tekstdokument som kun inneholder en kobling til ditt
   repository.
 * Vennligst bruk et tekstdokumentformat, ikke PDF, Word eller PowerPoint.
