@@ -3,12 +3,10 @@
 ## Krav til leveransen
 
 * Eksamensoppgaven er tilgjengelig i GitHub-repositoriet: https://github.com/glennbechdevops/eksamen_2023.
-* Når du leverer inn oppgaven via WiseFlow, vennligst opprett et tekstdokument som kun inneholder en kobling til dit
+* Når du leverer inn oppgaven via WiseFlow, vennligst opprett et tekstdokument som kun inneholder en kobling til ditt
   repository.
-* Vær snill og bruk et tekstdokumentformat, ikke PDF, Word eller PowerPoint.
-* Du skal ikke opprette en "fork" av dette repositoryet, men heller kopiere innholdet til et nytt repository. Årsaken er
-  at sensoren vil opprette en "fork" av ditt repository, og arbeidsflyten blir enklere hvis ditt repository ikke
-  allerede er en "fork."
+* Vennligst bruk et tekstdokumentformat, ikke PDF, Word eller PowerPoint.
+* Du skal ikke opprette en fork av dette repositoryet, men heller kopiere innholdet til et nytt repository.
 * Hvis du er bekymret for plagiat fra medstudenter, kan du arbeide i et privat repository og deretter gjøre det
   offentlig tilgjengelig like før innleveringsfristen.
 
@@ -23,9 +21,9 @@ Når sensoren evaluerer oppgaven, vil han/hun:
 ## Om GitHub Free Tier
 
 - I oppgaven blir du bedt om å opprette GitHub Actions Workflows.
-- Med GitHub "Free tier" har du tilgjengelig 2 000 minutter med gratis byggetid per måned i private repository
+- Med GitHub Free Tier har du 2000 minutter med gratis byggetid per måned i private repository
 - I ekstreme situasjoner, hvor du trenger mer byggetid, har du alternativet å gjøre repositoryet offentlig. Dette vil gi
-  deg ubegrenset byggetid.
+  deg ubegrenset byggetid. GitHub gir ubegrenset byggetid for offentlige repoer. 
 - Hvis du er bekymret for at andre kan kopiere arbeidet ditt når repositoryet er offentlig, kan du opprette en ny
   GitHub-bruker med et tilfeldig navn for anonymitet.
 
@@ -53,13 +51,13 @@ Som nyansatt har du blitt gitt den utfordrende oppgaven å overta etter "Kjell,"
 
 I denne oppgaven skal dere bli kjent med en ny AWS tjeneste
 
-AWS Rekognition er en tjeneste fra Amazon Web Services (AWS) som tilbyr avansert bilde- og videoanalyse ved hjelp av
+AWS Rekognition er en tjeneste fra Amazon Web Services som tilbyr avansert bilde- og videoanalyse ved hjelp av
 maskinlæringsteknologi. Den har en rekke funksjoner for å gjenkjenne og analysere ulike elementer i bilder og videoer,
 inkludert ansiktsgjenkjenning, objektgjenkjenning, tekstgjenkjenning og mer.
 
 AWS Rekognition kan brukes til å identifisere om personer på bilder eller i videoer bruker riktig personlig
 beskyttelsesutstyr som hjelmer, vernebriller,
-hansker, og verneklær. Dette kan være spesielt nyttig i situasjoner der det er viktig å sikre at arbeidere eller
+hansker og verneklær. Dette kan være spesielt nyttig i situasjoner der det er viktig å sikre at arbeidere eller
 besøkende følger sikkerhetskravene, for eksempel i byggebransjen, industrielle anlegg eller helsevesenet.
 
 Tjenesten kan også tilpasse seg ulike bransjer og bruksområder ved å tillate brukerne å lage
@@ -74,7 +72,7 @@ PPE er funnet.
 ## A. SAM & GitHub actions workflow
 
 Koden er skrevet som en AWS SAM applikasjon, og ligger i mappen "kjell" i dette repoet. Det er åpenbart at Kjell har
-tatt ugangspunkt i et "Hello World" SAM prosjekt og bare brukt navnet sitt som applikasjonsnavn.
+tatt utgangspunkt i et "Hello World" SAM prosjekt og bare brukt navnet sitt som applikasjonsnavn.
 
 * I ditt Cloud9-miljø, eller på din egen maskin med AWS SAM installert, kan du bygge og deploye koden til AWS ved å bruke ```sam cli```
 * Det anbefales å teste dette før du fortsetter.
@@ -118,8 +116,8 @@ Java-applikasjon som ligger i dette repoet. Applikasjonen er en Spring Boot appl
 
 ```http://<host>:<port>/scan-ppe?bucketName=<bucketnavn>```
 
-Som du vil se bearbeider Javakoden response fra tjenesten Rekognition litt mer en hva Python-varianten gjør.
-En respons fra Javaapplikasjonen kan se slik ut ;
+Som du vil se bearbeider java-koden response fra tjenesten Rekognition litt mer en hva Python-varianten gjør.
+En respons fra Java-applikasjonen kan se slik ut 
 
 ```shell
 {
