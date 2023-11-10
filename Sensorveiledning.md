@@ -1,4 +1,8 @@
-# Kjells python-kode
+# Sensorveiledning 
+
+Et komplett løsningsforslag  https://github.com/glennbechdevops/eksamen-2023 - Medsensor eller klagesensor må legges til som collaborator 
+
+# Oppgave 1. Kjells python-kode
 
 ## GitHub Actions Workflow
 
@@ -48,11 +52,56 @@ docker run -e AWS_ACCESS_KEY_ID=<sensor sin aws_access_key> -e AWS_SECRET_ACCESS
 
 Kandidaten endrer Pythonkoden slik at BUCKET_NAME leses fra miljøvariabel.
 
-## Migrering til Java og Spring boot
+# Oppgave 2. Overgang til Java og Spring boot
+
+
+## A. Dockerfile 
+
+De fleste vil være i stand til å lage en Dockerfile, jeg forventer mye copy/paste fra 
+lab-øvinger her. 
+
+## B. Workflow 
 
 * Følg studentens instruksjoner - hvordan få dette til å fungere i sensor sitt miljø
-* Lag en commit mot main branch, se at nytt container image blir laget i AWS ECR
+* En god løsning krever minimalt med endringer for å få workflow til å fungere for sensor
+* Kandidaten må forstå repository secrets og informere at sensor må bruke sine egne. 
+* Lag en commit mot main branch, se at nytt container image blir laget i AWS ECR, både med git commit hash og latest tag
 * Følg studenten sin instruksjon på hvordan starte en container, og se at du får et korrekt resultat ved å gjøre en GET
   request på http://localhost:8080/ppe-scan
+
+# Oppgave 3- Terraform, AWS Apprunner og Infrastruktur som kode
+
+## A. Kodeendringer og forbedringer
+
+### Høy oppnåelse 
+
+* Kandidaten bør demonstrere at han/hun har forstått bruk av variabler og defaultverdier 
+* Kandidaten bør legge til en "prefix" variabel eller tilsvarende for å lage alle ressursene sine med egne navn 
+
+## B. Terraform i GitHub Actions
+
+### Høy oppnåelse 
+
+* State fil i S3 Backend, korrekt providerdeklarasjon 
+* Kandidaten må lage en avhengighet mellom jobbene for Docker og Terraform
+
+# Oppgave 4. Feedback
+
+Her blir det noe subjektiv vurdering. 
+
+### Høy oppnåelse 
+
+* Hensikten med å utvide kodebasen er å få flere naturlige steder å legge inn måleinstrumenter. Kodevolum har ingen
+  betydning, men en god besvarelse vil  legge til virkelig og nyttig funksjonalitet
+* En god besvarelse registrer både tekniske, og foretningsmessig metrikker.
+* En god besvarelse bør bruke minst tre ulike måleinstrumenter på en måte som gir mening
+
+
+
+# Oppgave 5. Drøft
+
+Her blir det litt subjektiv vurdering
+
+
 
 
