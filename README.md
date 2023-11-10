@@ -197,6 +197,7 @@ docker run -p 8080:8080 -e AWS_ACCESS_KEY_ID=XXX -e AWS_SECRET_ACCESS_KEY=YYY -e
 
 * Lag en GitHub actions workflow som ved hver push til main branch lager og publiserer et nytt Container image til et
   ECR repository.
+* Workflow skal kompilere og bygge et nytt container image, men ikke publisere image til ECR dersom branch er noe annet en main  
 * Du må selv lage et ECR repository i AWS miljøet, du trenger ikke automatisere prosessen med å lage
   dette.
 * Container image skal ha en tag som er lik commit hash i Git. For eksempel; glenn-ppe:b2572585e.
