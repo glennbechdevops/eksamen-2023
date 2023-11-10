@@ -124,8 +124,54 @@ Java-applikasjon som ligger i dette repoet. Applikasjonen er en Spring Boot appl
 
 ```http://<host>:<port>/scan-ppe?bucketName=<bucketnavn>```
 
-Koden vil iterere over alle bilder i den oppgitte S3 bucketen, og bruke AWS Rekognition til å finne ut av om det er
-mennesker på disse bildene, og om de bruker verneutstyr eller ikke.
+Som du vil se bearbeider Javakoden response fra tjenesten Rekognition litt mer en hva Python-varianten gjør. 
+En respons fra Javaapplikasjonen kan se slik ut ; 
+
+```shell
+{
+    "bucketName": "kjellsimagebucket",
+    "results": [
+        {
+            "fileName": "Man-in-PPE-kit-307511-pixahive.jpg",
+            "violation": false,
+            "personCount": 1
+        },
+        {
+            "fileName": "almost_ppe.jpeg",
+            "violation": false,
+            "personCount": 1
+        },
+        {
+            "fileName": "download.jpeg",
+            "violation": true,
+            "personCount": 1
+        },
+        {
+            "fileName": "one_person_ppe.jpeg",
+            "violation": false,
+            "personCount": 1
+        },
+        {
+            "fileName": "personnel-with-the-united-states-public-health-service-34a5d6-1024.jpg",
+            "violation": false,
+            "personCount": 2
+        },
+        {
+            "fileName": "two_persons_one_no_ppe.jpeg",
+            "violation": true,
+            "personCount": 2
+        }
+    ]
+}
+```
+
+Vi får tilbake ett element per fil som inneholder 
+
+* Filename - Navnet på filen i S3 bucketen 
+* violation - true hvis det er person, eller personer på bildet uten nødvendig utstyr 
+* personCount - hvor mange personer Rekognition fant på bildet.
+
+## Oppgave
 
 Lag en workflow fil for Java/Spring-Boot applikasjonen.
 
