@@ -288,7 +288,7 @@ vennligst inkluder:
 - Fordelene med å bruke CI i et utviklingsprosjekt.
 - Hvordan CI kan forbedre kodekvaliteten og effektivisere utviklingsprosessen.
 - Hvordan opplever en utvikler hverdagen i et prosjekt som har sterkt fokus på CI?
-- Hvordan jobber vi med CI i GitHub rent praktisk?
+- Hvordan jobber vi med CI i GitHub rent praktisk? For eskempel i et utviklingsteam på fire/fem utivklere?
 
 ### B. Sammenligning av Scrum/Smidig og DevOps fra et Utviklers Perspektiv
 
