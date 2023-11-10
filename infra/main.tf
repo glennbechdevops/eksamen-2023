@@ -51,6 +51,12 @@ data "aws_iam_policy_document" "policy" {
     actions   = ["s3:*"]
     resources = ["*"]
   }
+
+  statement  {
+    effect    = "Allow"
+    actions   = ["cloudwatch:*"]
+    resources = ["*"]
+  }
 }
 
 resource "aws_iam_policy" "policy" {
