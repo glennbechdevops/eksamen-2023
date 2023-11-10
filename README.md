@@ -211,7 +211,7 @@ stand til å gjøre API kall mot AWS Rekognition og lese fra S3.
 
 ## A. Kodeendringer og forbedringer
 
-* Fjern hardkodingen av service_name, slik at du kan bruke dit kandidatnummer eller noe annet som service navn.
+* Fjern hardkodingen av service_name, slik at du kan bruke ditt kandidatnummer eller noe annet som service navn.
 * Se etter andre hardkodede verdier og se om du kan gjøer noe med kodekvaliteten
 * Se på dokumentasjonen til aws_apprunner_service ressursen, og reduser CPU til 256, og Memory til 1024 (defaultverdiene
   er høyere)
