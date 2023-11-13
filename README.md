@@ -21,7 +21,7 @@ Når sensoren evaluerer oppgaven, vil han/hun:
 ## Om GitHub Free Tier
 
 - I oppgaven blir du bedt om å opprette GitHub Actions Workflows.
-- Med GitHub Free Tier har du 2000 minutter med gratis byggetid per måned i private repository
+- Med GitHub Free Tier har du 2000 minutter med gratis byggetid per måned i private repository.
 - Hvis du trenger mer byggetid, har du alternativet å gjøre repositoryet offentlig. Dette vil gi
   deg ubegrenset byggetid. GitHub gir ubegrenset byggetid for offentlige repoer.
 - Hvis du er bekymret for at andre kan kopiere arbeidet ditt når repositoryet er offentlig, kan du opprette en ny
@@ -29,8 +29,8 @@ Når sensoren evaluerer oppgaven, vil han/hun:
 
 ## Spesielle hensyn knyttet til Cloud 9
 
-- Løsning på problem med diskplassmangel - informasjon bli delt på Canvas-plattformen.
-- Informasjon om rettigheter og sikkerhet i Cloud 9 vil også bli delt på Canvas
+- Løsning på problem med diskplassmangel - informasjon blir delt på Canvas-plattformen.
+- Informasjon om rettigheter og sikkerhet i Cloud 9 vil også bli delt på Canvas.
 
 # Evaluering
 
@@ -42,8 +42,8 @@ Når sensoren evaluerer oppgaven, vil han/hun:
 
 # Oppgavebeskrivelse
 
-I et pulserende teknologisamfunn på Grünerløkka, Oslo, har en livlig oppstart ved navn 'VerneVokterne' begynt å meisle
-ut sitt eget nisjeområde innenfor helsesektoren. De utvikler banebrytende programvare for bildebehandling som er
+I et pulserende teknologisamfunn på Grünerløkka, Oslo, har en livlig oppstart ved navn 'VerneVokterne' funnet
+sitt eget nisjeområde innenfor helsesektoren. De utvikler banebrytende programvare for bildebehandling som er
 designet
 for å sikre at helsepersonell alltid bruker personlig verneutstyr (PPE). Med en lidenskap for innovasjon og et sterkt
 ønske om å forbedre arbeidssikkerheten, har 'VerneVokterne' samlet et team av dyktige utviklere, engasjerte designere og
@@ -58,7 +58,7 @@ Som nyansatt har du blitt gitt den utfordrende oppgaven å overta etter "Kjell,"
 
 # Litt om AWS Rekognition
 
-I denne oppgaven skal dere bli kjent med en ny AWS tjeneste
+I denne oppgaven skal dere bli kjent med en ny AWS tjeneste.
 
 AWS Rekognition er en tjeneste fra Amazon Web Services som tilbyr avansert bilde- og videoanalyse ved hjelp av
 maskinlæringsteknologi. Den har en rekke funksjoner for å gjenkjenne og analysere ulike elementer i bilder og videoer,
@@ -86,7 +86,7 @@ miljøet https://eu-west-1.console.aws.amazon.com/rekognition/home
 Koden er skrevet som en AWS SAM applikasjon, og ligger i mappen "kjell" i dette repoet. Det er åpenbart at Kjell har
 tatt utgangspunkt i et "Hello World" SAM prosjekt og bare brukt navnet sitt som applikasjonsnavn.
 
-* Denne applikasjonen oppretter en S3 Bucket, du bør sørge for at den lages en med ditt kandidatnavn, og du kan under eksamen bruke
+* Denne SAM-applikasjonen oppretter en S3 Bucket og du bør sørge for at den lages med ditt kandidatnavn, og du kan under eksamen bruke
   denne bucketen til å laste opp egne bilder for å teste din egen applikasjon.
 * I ditt Cloud9-miljø, eller på din egen maskin, kan du bygge og deploye koden til AWS ved å bruke ```sam cli```
 * Det anbefales å teste dette før du fortsetter.
@@ -96,7 +96,7 @@ Advarsel! Se opp for hardkoding ! Du må kanskje endre noe for å få deployet s
 ### Oppgave
 
 * Fjerne hardkoding  av S3 bucket navnet ```app.py koden```, slik at den leser verdien "BUCKET_NAME" fra en miljøvariabel.
-* Du kan gjerne teste APIet ditt ved å bruke kjell sine bilder  https://s3.console.aws.amazon.com/s3/buckets/kjellsimagebucket?region=eu-west-1&tab=properties
+* Du kan gjerne teste APIet ditt ved å bruke kjell sine bilder  https://s3.console.aws.amazon.com/s3/buckets/kjellsimagebucket?region=eu-west-1
 * Du skal opprette en GitHub Actions-arbeidsflyt for SAM applikasjonen. For hver push til main branch, skal
   arbeidsflyten bygge og deploye Lambda-funksjonen.
 * Som respons på en push til en annen branch en main, skal applikasjonen kun bygges.
@@ -105,7 +105,7 @@ Advarsel! Se opp for hardkoding ! Du må kanskje endre noe for å få deployet s
 
 ## B. Docker container
 
-Python er ikke et veldig etablert språk i VerneVokterene, og du vil gjerne at utviklere som ikke har et Python
+Python er ikke et veldig etablert språk i VerneVokterene, og du vil gjerne at utviklere som ikke har Python
 installert på sin maskin skal kunne teste koden.
 
 ### Opppgave
@@ -120,7 +120,7 @@ docker build -t kjellpy .
 docker run -e AWS_ACCESS_KEY_ID=XXX -e AWS_SECRET_ACCESS_KEY=YYY -e BUCKET_NAME=kjellsimagebucket kjellpy
 ```
 
-Det ligger noen hint i filen app.py som vil hjelpe deg med å lage en Dockerfile
+Det ligger noen hint i filen app.py som vil hjelpe deg med å lage en ```Dockerfile```. 
 
 # Oppgave 2. Overgang til Java og Spring boot
 
@@ -181,9 +181,10 @@ Vi får tilbake ett JSON-objekt per fil i S3 Bucketen som inneholder følgende a
 * Test java-applikasjonen lokalt i ditt cloud9 miljø ved å stå i rotmappen til ditt repository, og kjøre
   kommandoen ```mvn spring-boot:run```
 * Du kan teste applikasjonen i en terminal med ```curl localhost:8080/scan-ppe?bucketName=<din bucket>``` og se på
-  responsen
+  responsen.
 
-### Oppgave 
+### Oppgave
+
 * Lag en Dockerfile for Java-appliksjonen. Du skal lage en multi stage Dockerfile som både kompilerer og kjører
   applikasjonen.
 
@@ -203,11 +204,11 @@ Lag en ny GitHub Actions Workflow fil, ikke gjenbruk den du lagde for Pythonkode
 
 * Lag en GitHub actions workflow som ved hver push til main branch lager og publiserer et nytt Container image til et
   ECR repository.
-* Workflow skal kompilere og bygge et nytt container image, men ikke publisere image til ECR dersom branch er noe annet en main  
+* Workflow skal kompilere og bygge et nytt container image, men ikke publisere image til ECR dersom branch er noe annet en main.  
 * Du må selv lage et ECR repository i AWS miljøet, du trenger ikke automatisere prosessen med å lage
   dette.
-* Container image skal ha en tag som er lik commit hash i Git. For eksempel; glenn-ppe:b2572585e.
-* Den siste versjonen av container image som blir pushet til ECR, skal i tillegg få en tag "latest"
+* Container image skal ha en tag som er lik commit-hash i Git, for eksempel: ```glenn-ppe:b2572585e```.
+* Den siste versjonen av container image som blir pushet til ECR, skal i tillegg få en tag "latest".
 
 # Oppgave 3- Terraform, AWS Apprunner og Infrastruktur som kode
 
@@ -217,7 +218,7 @@ stand til å gjøre API kall mot AWS Rekognition og lese fra S3.
 ## A. Kodeendringer og forbedringer
 
 * Fjern hardkodingen av service_name, slik at du kan bruke ditt kandidatnummer eller noe annet som service navn.
-* Se etter andre hardkodede verdier og se om du kan gjøer noe med kodekvaliteten
+* Se etter andre hard-kodede verdier og se om du kan forbedre kodekvaliteten.
 * Se på dokumentasjonen til aws_apprunner_service ressursen, og reduser CPU til 256, og Memory til 1024 (defaultverdiene
   er høyere)
 
@@ -243,7 +244,7 @@ Se på dokumentasjonen; https://aws.amazon.com/rekognition/
 rammeverket for Metrics, og konfigurer  for leveranse av Metrics til CloudWatch
 * Dere kan detetter selv velge hvordan dere implementerer måleinstrumenter i koden.
 
-Med måleinstrumenter menes i denne sammenhengen ulike typer "meters" i micrometer rammeverket feks,
+Med måleinstrumenter menes i denne sammenhengen ulike typer "meters" i micrometer rammeverket for eksempel;
 
 * Meter
 * Gauge
@@ -257,17 +258,17 @@ metrikkene allerede leveres av Spring Boot/Actuator.
 
 ### Vurderingskriterier
 
-* Hensikten med å utvide kodebasen er å få flere naturlige steder å legge inn måleinstrumenter. Det gis ikke poeng for et stort kodevolum, men en god besvarelse vil legge til virkelig og nyttig funksjonalitet
+* Hensikten med å utvide kodebasen er å få flere naturlige steder å legge inn måleinstrumenter. Det gis ikke poeng for et stort kodevolum, men en god besvarelse vil legge til virkelig og nyttig funksjonalitet.
 * En god besvarelse registrer både tekniske, og foretningsmessig metrikker.
-* En god besvarelse bør bruke minst tre ulike måleinstrumenter på en god og relevant måte- 
+* En god besvarelse bør bruke minst tre ulike måleinstrumenter på en god og relevant måte.
 
 ### B. CloudWatch Alarm og Terraform moduler
 
-Lag en CloudWatch alarm som sender et varsler på Epost dersom den utløses. Dere velger selv kriteriet for kriterier til at alarmen
+Lag en CloudWatch-alarm som sender et varsel på Epost dersom den utløses.Dere velger selv kriteriet for kriterier til at alarmen
 skal løses ut, men dere  må skrive en kort redgjørelse for valget.  
 
 Alarmen skal lages ved hjelp av Terraformkode. Koden skal lages som en separat Terraform modul. Legg vekt på å unngå
-hardkoding  av verdier i modulen for maksimal gjenbrukbarhet. Pass samtidig på at brukere av modulen ikke må oppgå veldig mange
+hardkoding  av verdier i modulen for maksimal gjenbrukbarhet. Pass samtidig på at brukere av modulen ikke må sette mange
 variabler når de inkluderer den i koden sin.
 
 # Oppgave 4. Drøfteoppgaver
@@ -276,13 +277,11 @@ variabler når de inkluderer den i koden sin.
 
 ### A. Kontinuerlig Integrering
 
-Forklar hva kontinuerlig integrasjon (CI) er og diskuter dens betydning i programvareutviklingsprosessen. I ditt svar,
+Forklar hva kontinuerlig integrasjon (CI) er og diskuter dens betydning i utviklingsprosessen. I ditt svar,
 vennligst inkluder:
 
 - En definisjon av kontinuerlig integrasjon.
-- Fordelene med å bruke CI i et utviklingsprosjekt.
-- Hvordan CI kan forbedre kodekvaliteten og effektivisere utviklingsprosessen.
-- Hvordan opplever en utvikler hverdagen i et prosjekt som har sterkt fokus på CI?
+- Fordelene med å bruke CI i et utviklingsprosjekt - hvordan CI kan forbedre kodekvaliteten og effektivisere utviklingsprosessen.
 - Hvordan jobber vi med CI i GitHub rent praktisk? For eskempel i et utviklingsteam på fire/fem utivklere?
 
 ### B. Sammenligning av Scrum/Smidig og DevOps fra et Utviklers Perspektiv
