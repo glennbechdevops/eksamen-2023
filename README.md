@@ -95,10 +95,11 @@ Advarsel! Se opp for hardkoding ! Du må kanskje endre noe for å få deployet s
 
 ### Oppgave
 
+* Fjerne hardkoding  av S3 bucket navnet ```app.py koden```, slik at den leser verdien "BUCKET_NAME" fra en miljøvariabel.
+* Du kan gjerne teste APIet ditt ved å bruke kjell sine bilder  https://s3.console.aws.amazon.com/s3/buckets/kjellsimagebucket?region=eu-west-1&tab=properties
 * Du skal opprette en GitHub Actions-arbeidsflyt for SAM applikasjonen. For hver push til main branch, skal
   arbeidsflyten bygge og deploye Lambda-funksjonen.
-* Som respons på en push til en annen branch en main, skal applikasjonen kun kompileres og
-  bygges.
+* Som respons på en push til en annen branch en main, skal applikasjonen kun bygges.
 * Sensor vil lage en fork av ditt repository. Forklar hva sensor må gjøre for å få GitHub Actions workflow til å kjøre i
   sin egen GitHub-konto.
 
@@ -109,9 +110,7 @@ installert på sin maskin skal kunne teste koden.
 
 ### Opppgave
 
-Lag en Dockerfile som bygger et container image du kan bruke for å kjøre python koden. Du må løse og fjerne hardkoding
-av bucketnavn i app.py koden, slik at den leser
-verdien "BUCKET_NAME" fra en miljøvariabel.
+Lag en Dockerfile som bygger et container image du kan bruke for å kjøre python koden. 
 
 Dockerfilen skal lages i mappen ```/kjell/hello_world```. Sensor skal kunne gjøre følgende kommando for å bygge et
 container image og kjøre koden.
@@ -171,18 +170,20 @@ En respons fra Java-applikasjonen kan se slik ut
 }
 ```
 
-Vi får tilbake ett element per fil som inneholder
+Vi får tilbake ett JSON-objekt per fil i S3 Bucketen som inneholder følgende attributter
 
 * Filename - Navnet på filen i S3 bucketen
 * violation - true hvis det er person, eller personer på bildet uten nødvendig utstyr
 * personCount - hvor mange personer Rekognition fant på bildet.
 
-### A. Dockerfile
+## A. Dockerfile
 
 * Test java-applikasjonen lokalt i ditt cloud9 miljø ved å stå i rotmappen til ditt repository, og kjøre
   kommandoen ```mvn spring-boot:run```
 * Du kan teste applikasjonen i en terminal med ```curl localhost:8080/scan-ppe?bucketName=<din bucket>``` og se på
   responsen
+
+### Oppgave 
 * Lag en Dockerfile for Java-appliksjonen. Du skal lage en multi stage Dockerfile som både kompilerer og kjører
   applikasjonen.
 
@@ -193,7 +194,12 @@ docker build -t ppe .
 docker run -p 8080:8080 -e AWS_ACCESS_KEY_ID=XXX -e AWS_SECRET_ACCESS_KEY=YYY -e BUCKET_NAME=kjellsimagebucket ppe
 ```
 
-### B. GitHub Actions workflow for container image og ECR
+## B. GitHub Actions workflow for container image og ECR
+
+Du skal nå automatisere prosessen med å bygge/kompilere og teste Java-applikasjonen.
+Lag en ny GitHub Actions Workflow fil, ikke gjenbruk den du lagde for Pythonkoden.
+
+### Oppgave 
 
 * Lag en GitHub actions workflow som ved hver push til main branch lager og publiserer et nytt Container image til et
   ECR repository.
@@ -202,7 +208,6 @@ docker run -p 8080:8080 -e AWS_ACCESS_KEY_ID=XXX -e AWS_SECRET_ACCESS_KEY=YYY -e
   dette.
 * Container image skal ha en tag som er lik commit hash i Git. For eksempel; glenn-ppe:b2572585e.
 * Den siste versjonen av container image som blir pushet til ECR, skal i tillegg få en tag "latest"
-* Lag en ny Workflow fil, ikke gjenbruk den du lagde for Pythonkoden.
 
 # Oppgave 3- Terraform, AWS Apprunner og Infrastruktur som kode
 
@@ -219,31 +224,24 @@ stand til å gjøre API kall mot AWS Rekognition og lese fra S3.
 ## B. Terraform i GitHub Actions
 
 * Utvid din GitHub Actions workflow som lager et Docker image, til også å kjøre terraformkoden
-* På hver push til main, skal Terraformkoden kjøres etter jobber som bygger Docker container image.
-* Du må skrive en provider/backend konfigurasjon som lagrer en state-fil på en S3 bucket. Du kan bruke samme S3 bucket
+* På hver push til main, skal Terraformkoden kjøres etter jobber som bygger Docker container image
+* Du må lege til Terraform provider og backend-konfigurasjon. Dette har Kjell glemt. Du kan bruke samme S3 bucket
   som vi har brukt til det formålet i øvingene.
-* Beskriv hvilken Terraform kommandoer sensor må gjøre for å kunne opprette infrastrukturen i sin egen AWS konto, for
-  eksempel
+* Beskriv også hvilke endringer, om noen, sensor må gjøre i sin fork, GitHub Actions workflow eller kode for å få denne til å kjøre i sin fork.
 
-```
-    terraform init 
-    terraform apply --auto-approve --var prefix=<prefix> --var bucket=<bucket name>
-```
+# Oppgave 4. Feedback
 
-* Beskriv også eventuelt hvilke endringer Sensor må gjøre i din GitHub Actions workflow eller kode som provider.tf
+## A. Utvid applikasjonen og legg inn "Måleinstrumenter"
 
-## Oppgave 4. Feedback
+I denne oppgaven får dere stor kreativ frihet i å utforske tjenesten Rekognition. Derw skal lage ny og relevant funksjonalitet. 
+Lag minst et nytt endepunkt, og utvid gjerne også den eksisterende koden med mer funksjonalitet. 
+Se på dokumentasjonen; https://aws.amazon.com/rekognition/
 
-### A. Utvid applikasjonen og legg inn "Måleinstrumenter"
+### Oppgave 
 
-I denne oppgaven får dere stor kreativ frihet i å utforske tjenesten Rekognition og se om
-dere kan lage ny og relevant funksjonalitet. Lag minst et nytt endepunkt. Se på
-dokumentasjonen; https://aws.amazon.com/rekognition/
-
-Nå som dere har en litt større kodebase. Gjør nødvendige endringer i Java-applikasjonen til å bruke Micrometer
-rammeverket for Metrics, og konfigurer
-for leveranse av Metrics til CloudWatch
-Dere kan detetter selv velge hvordan dere implementerer målepunkter i koden.
+* Nå som dere har en litt større kodebase. Gjør nødvendige endringer i Java-applikasjonen til å bruke Micrometer
+rammeverket for Metrics, og konfigurer  for leveranse av Metrics til CloudWatch
+* Dere kan detetter selv velge hvordan dere implementerer måleinstrumenter i koden.
 
 Med måleinstrumenter menes i denne sammenhengen ulike typer "meters" i micrometer rammeverket feks,
 
@@ -253,26 +251,23 @@ Med måleinstrumenter menes i denne sammenhengen ulike typer "meters" i micromet
 * LongTaskTimer
 * DistributionSummary
 
-Dere skal skrive en kort begrunnelse for hvorfor dere har valgt målepunktene dere har gjort, og valgene må gi mening.
-Eksempelvis vil en en teller som øker hver gang en metode blir kalt ikke bli vurdert som en god løsning.
+Dere skal skrive en kort begrunnelse for hvorfor dere har valgt måleinstrumentene dere har gjort, og valgene må  være relevante. 
+Eksempelvis vil en en teller som øker hver gang en metode blir kalt ikke bli vurdert som en god besvarelse, dette fordi denne 
+metrikkene allerede leveres av Spring Boot/Actuator. 
 
 ### Vurderingskriterier
 
-* Hensikten med å utvide kodebasen er å få flere naturlige steder å legge inn måleinstrumenter. Kodevolum har ingen
-  betydning, men en god besvarelse vil  
-  legge til virkelig og nyttig funksjonalitet
+* Hensikten med å utvide kodebasen er å få flere naturlige steder å legge inn måleinstrumenter. Det gis ikke poeng for et stort kodevolum, men en god besvarelse vil legge til virkelig og nyttig funksjonalitet
 * En god besvarelse registrer både tekniske, og foretningsmessig metrikker.
-* En god besvarelse bør bruke minst tre ulike måleinstrumenter på en måte som gir mening
+* En god besvarelse bør bruke minst tre ulike måleinstrumenter på en god og relevant måte- 
 
 ### B. CloudWatch Alarm og Terraform moduler
 
-Lag en CloudWatch alarm som sender et varsler på Epost dersom den utløses. Derre velger selv kriteriet for når alarmen
-skal løses ut, men dere
-må skrive en kort begrunnelse for valget, og valget må gi mening.
+Lag en CloudWatch alarm som sender et varsler på Epost dersom den utløses. Dere velger selv kriteriet for kriterier til at alarmen
+skal løses ut, men dere  må skrive en kort redgjørelse for valget.  
 
 Alarmen skal lages ved hjelp av Terraformkode. Koden skal lages som en separat Terraform modul. Legg vekt på å unngå
-hardkoding
-av verdier i modulen for maksimal gjenbrukbarhet.Pass samtidig på at brukere av modulen ikke må oppgå veldig mange
+hardkoding  av verdier i modulen for maksimal gjenbrukbarhet. Pass samtidig på at brukere av modulen ikke må oppgå veldig mange
 variabler når de inkluderer den i koden sin.
 
 # Oppgave 4. Drøfteoppgaver
@@ -324,6 +319,6 @@ leveransetempoet i programvareutviklingsprosjekter.
 Tenk deg at du har implementert en ny funksjonalitet i en applikasjon du jobber med. Beskriv hvordan du vil
 etablere og bruke teknikker vi har lært fra "feedback" for å sikre at den nye funksjonaliteten møter brukernes behov.
 Behovene Drøft hvordan feedback bidrar til kontinuerlig forbedring og hvordan de kan integreres i ulike stadier av
-utviklingslivssyklusen."
+utviklingslivssyklusen.
 
 ## LYKKE TIL OG HA DET GØY MED OPPGAVEN!

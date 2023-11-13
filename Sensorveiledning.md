@@ -1,6 +1,8 @@
 # Sensorveiledning 
 
-Et komplett løsningsforslag  https://github.com/glennbechdevops/eksamen-2023 - Medsensor eller klagesensor må legges til som collaborator 
+* Et komplett løsningsforslag  https://github.com/glennbechdevops/eksamen-2023 - Medsensor eller klagesensor må legges til som collaborator 
+* Vektig av de ulike oppgavene er oppgitt i Eksamensoppgaven
+* Under retting av eksamne, vil hovedsensor lage et delt excelark for vurdering som automatisk vil kalkulere karakter og poengsum for kandidatene
 
 # Oppgave 1. Kjells python-kode
 
