@@ -55,7 +55,8 @@ docker run -e AWS_ACCESS_KEY_ID=<sensor sin aws_access_key> -e AWS_SECRET_ACCESS
 
 ### Høy oppnåelse
 
-Kandidaten endrer Pythonkoden slik at BUCKET_NAME leses fra miljøvariabel.
+* Kandidaten endrer Pythonkoden slik at BUCKET_NAME leses fra miljøvariabel
+* dockerfile bør ikke inneholde vesentlig annet en som nevnt over, det kan da være at kandidaten har brukt generativ AI eller kopiert inn noe kandidaten ikke forsåtr. 
 
 # Oppgave 2. Overgang til Java og Spring boot
 
