@@ -16,7 +16,7 @@ on:
   push:
 ```
 
-Og på deploy steget sjekker branch, og bare start på main
+Og på *deploy* steget sjekker branch, og bare starter dersom main branch er et som endres slik;
 
 ```shell
   - name: Deploy
@@ -24,12 +24,15 @@ Og på deploy steget sjekker branch, og bare start på main
     working-directory: ./kjell
 ```
 
-Sensor kan teste dette ved å lage og pushe en vilkårlig branch til repository
+Sensor kan teste dette ved å lage og pushe en vilkårlig branch til repository på main og en feature branch.
+
 
 ### Høy oppnåelse
 
 * Kandidaten har klart å fjerne hardkoding av Bucketnavn fra template.yml, og sender det inn som parameter
-  fra ``sam deploy`` kommandonen med ```parameter-overrides```
+  fra ``sam deploy`` kommandonen med ```parameter-overrides``` Det er også Ok å å sette bucketname environment variabel
+  i template.yml
+  
 
 ## Python
 
